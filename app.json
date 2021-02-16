@@ -1,0 +1,12 @@
+{
+  "name": "electric-eagles",
+  "displayName": "electric-eagles",
+  "expo": {
+    "name": "electric-eagles",
+    "slug": "electric-eagles",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
