@@ -8,6 +8,7 @@ import {
     AppForm, 
     SubmitButton 
 } from '../../components';
+import { loginWithEmail } from '../../firebase/firebase';
 
 
 const validationSchema = Yup.object().shape({
@@ -17,6 +18,17 @@ const validationSchema = Yup.object().shape({
 
 
 function LoginScreen({ navigation }) {
+
+    async function handleOnLogin(values) {
+        const { email, password } = values;
+    
+        try {
+          await loginWithEmail(email, password);
+        } catch (error) {
+          setLoginError(error.message);
+        }
+      }
+
     return (
         <Screen>
             <View style={styles.container}>
@@ -26,7 +38,7 @@ function LoginScreen({ navigation }) {
                     email: '', 
                     password: ''
                     }}
-                onSubmit={values => console.log(values)}
+                onSubmit={values => handleOnLogin(values)}
                 validationSchema={validationSchema}
             >
                 <View style={{paddingBottom: 140}}>

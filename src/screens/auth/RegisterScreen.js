@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
 
@@ -6,8 +6,10 @@ import {
     Screen, 
     AppFormField, 
     AppForm, 
-    SubmitButton 
+    SubmitButton,
+    ErrorMessage
 } from '../../components';
+import { registerWithEmail } from '../../firebase/firebase';
 
 
 const validationSchema = Yup.object().shape({
@@ -18,9 +20,25 @@ const validationSchema = Yup.object().shape({
 
 
 function RegisterScreen({ navigation }) {
+
+    const [registerError, setRegisterError] = useState('');
+
+    async function handleOnSignUp(values) {
+        const { email, password } = values;
+        try {
+          await registerWithEmail(email, password);
+        } catch (error) {
+          setRegisterError(error.message);
+        }
+      }
+
     return (
         <Screen>
             <View style={styles.container}>
+
+            <View style={{paddingBottom: 140}}>
+                    <Text style={styles.text} >Register Screen</Text>
+                </View>
             
             <AppForm
                 initialValues={{ 
@@ -28,12 +46,10 @@ function RegisterScreen({ navigation }) {
                     password: '',
                     confirmPassword: ''
                     }}
-                onSubmit={values => console.log(values)}
+                onSubmit={values => handleOnSignUp(values)}
                 validationSchema={validationSchema}
             >
-                <View style={{paddingBottom: 140}}>
-                    <Text style={styles.text} >Register Screen</Text>
-                </View>
+
 
                 <View style={styles.input_container}>
                     <AppFormField 
@@ -64,10 +80,11 @@ function RegisterScreen({ navigation }) {
                         textContentType="password"
                     />
                 </View>
-     
+                
                 <View style={styles.button_container} >
                     <SubmitButton title="Register" />
                 </View>
+                <ErrorMessage error={registerError} visible={true} />
             </AppForm>
                 <TouchableOpacity 
                     style={{
