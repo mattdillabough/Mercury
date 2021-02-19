@@ -31,7 +31,7 @@ function RegisterScreen({ navigation }) {
                 { ({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                     <>
 
-                <View style={{marginBottom: 100}}>
+                <View style={{paddingBottom: 140}}>
                     <Text style={styles.text} >Register Screen</Text>
                 </View>
 
