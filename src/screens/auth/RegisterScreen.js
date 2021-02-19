@@ -1,9 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Screen, AppButton, AppFormField } from '../../components';
+import { 
+    Screen, 
+    AppFormField, 
+    AppForm, 
+    SubmitButton 
+} from '../../components';
 
 
 const validationSchema = Yup.object().shape({
@@ -18,7 +22,7 @@ function RegisterScreen({ navigation }) {
         <Screen>
             <View style={styles.container}>
             
-            <Formik
+            <AppForm
                 initialValues={{ 
                     email: '', 
                     password: '',
@@ -27,9 +31,6 @@ function RegisterScreen({ navigation }) {
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
-                { ({ handleSubmit, }) => (
-                    <>
-
                 <View style={{paddingBottom: 140}}>
                     <Text style={styles.text} >Register Screen</Text>
                 </View>
@@ -65,11 +66,9 @@ function RegisterScreen({ navigation }) {
                 </View>
      
                 <View style={styles.button_container} >
-                    <AppButton title="Register" onPress={handleSubmit} />
+                    <SubmitButton title="Register" />
                 </View>
-
-                </>)}
-            </Formik>
+            </AppForm>
                 <TouchableOpacity 
                     style={{
                         alignSelf: 'center', 
