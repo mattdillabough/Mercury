@@ -3,8 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Screen, AppButton, AppTextInput, ErrorMessage } from '../../components';
-import { set } from 'react-native-reanimated';
+import { Screen, AppButton, AppFormField } from '../../components';
 
 
 const validationSchema = Yup.object().shape({
@@ -28,7 +27,7 @@ function RegisterScreen({ navigation }) {
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
-                { ({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
+                { ({ handleSubmit, }) => (
                     <>
 
                 <View style={{paddingBottom: 140}}>
@@ -36,50 +35,40 @@ function RegisterScreen({ navigation }) {
                 </View>
 
                 <View style={styles.input_container}>
-                    <AppTextInput 
+                    <AppFormField 
                         autoCapitalize="none"
                         autoCorrect={false}
                         icon="email"
                         keyboardType="email-address"
-                        onBlur={() => setFieldTouched("email")}
-                        onChangeText={handleChange("email")}
                         name="email"
                         placeholder="Email Address"  
                         textContentType="emailAddress" 
                     />
-                    <ErrorMessage error={errors.email} visible={touched.email} />
-                    <AppTextInput 
+                    <AppFormField
                         autoCapitalize="none"
                         autoCorrect={false}
                         icon="lock" 
-                        onBlur={() => setFieldTouched("password")}
-                        onChangeText={handleChange("password")}
                         name="password"
                         placeholder="Password"
                         secureTextEntry={true}
                         textContentType="password"
                     />
-                    <ErrorMessage error={errors.password} visible={touched.password} />
-                    <AppTextInput 
+                    <AppFormField
                         autoCapitalize="none"
                         autoCorrect={false}
                         icon="lock"
-                        onBlur={() => setFieldTouched("confirmPassword")}
-                        onChangeText={handleChange("confirmPassword")} 
                         name="confirmPassword"
                         placeholder="Confirm Password"
                         secureTextEntry={true}
                         textContentType="password"
                     />
-                    <ErrorMessage error={errors.confirmPassword} visible={touched.confirmPassword} />
                 </View>
      
                 <View style={styles.button_container} >
                     <AppButton title="Register" onPress={handleSubmit} />
                 </View>
 
-                </>
-                )}
+                </>)}
             </Formik>
                 <TouchableOpacity 
                     style={{
