@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Yup from 'yup';
 
-import { Screen, AppButton, AppTextInput } from '../../components';
+import { 
+    Screen, 
+    AppFormField, 
+    AppForm, 
+    SubmitButton 
+} from '../../components';
 
 
 const validationSchema = Yup.object().shape({
@@ -13,20 +18,50 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
     return (
-        <Screen style={{backgroundColor: 'green'}}>
-            <Text style={styles.text}>Login Screen</Text>
-            <View style={styles.container}>           
+        <Screen>
+            <View style={styles.container}>
+            
+            <AppForm
+                initialValues={{ 
+                    email: '', 
+                    password: ''
+                    }}
+                onSubmit={values => console.log(values)}
+                validationSchema={validationSchema}
+            >
+                <View style={{paddingBottom: 140}}>
+                    <Text style={styles.text} >Login Screen</Text>
+                </View>
 
                 <View style={styles.input_container}>
-                    <AppTextInput placeholder="Email Address" icon="email" />
-                    <AppTextInput placeholder="Password" icon="lock" />
+                    <AppFormField 
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="email"
+                        keyboardType="email-address"
+                        name="email"
+                        placeholder="Email Address"  
+                        textContentType="emailAddress" 
+                    />
+                    <AppFormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="lock" 
+                        name="password"
+                        placeholder="Password"
+                        secureTextEntry={true}
+                        textContentType="password"
+                    />
                 </View>
-                
-                <View style={styles.button_container}>
-                    <AppButton title="Login" />
+     
+                <View style={styles.button_container} >
+                    <SubmitButton title="Login" />
                 </View>
+            </AppForm>
 
-                <TouchableOpacity style={{alignSelf: 'center', marginBottom: 25}} onPress={() => navigation.navigate("Register")} >
+                <TouchableOpacity 
+                    style={{ alignSelf: 'center', marginBottom: 25 }} 
+                    onPress={() => navigation.navigate("Register")} >
                     <Text style={{color: '#9b6be8'}}>Don't have an account?</Text>
                 </TouchableOpacity>
 
@@ -42,16 +77,14 @@ const styles = StyleSheet.create({
     },
     button_container: {
         paddingHorizontal: '5%',
-        marginBottom: 50,
-        marginTop: 35,
+        marginBottom: 60,
+        marginTop: 30,
     },
     input_container: {
         paddingHorizontal: '5%',        
     },
     text: {
         alignSelf: 'center',
-        justifyContent: 'flex-start',
-        paddingTop: 70,
         fontSize: 30,
     }
 })
