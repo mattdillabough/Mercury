@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 
 function AuthStack(props) {
     return (
-        <Stack.Navigator initialRouteName="Register" headerMode="none">
+        <Stack.Navigator initialRouteName="Welcome" headerMode="none">
             <Stack.Screen name="Welcome"    component={WelcomeScreen} />
             <Stack.Screen name="Login"      component={LoginScreen} />
             <Stack.Screen name="Register"   component={RegisterScreen} />

@@ -1,29 +1,42 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import Constants from 'expo-constants';
 import { View, Text, StyleSheet } from 'react-native';
-//import AppButton from '../../components/AppButton';
 
-import { Screen } from '../../components';
+import { Screen, AppButton } from '../../components';
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
     return (
         <Screen style={styles.containers}>
-            <StatusBar backgroundColor="white" />
-            <View>
-                <Text>Welcome Screen</Text>
-            </View>       
+            <View style={styles.container}>
+                <View style={styles.title}>
+                    <Text style={styles.text}>Welcome Screen</Text>
+                </View>
+                <View style={styles.button_container}>
+                    <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
+                    <AppButton title="Register" onPress={() => navigation.navigate("Register")} />
+                </View>
+            </View>
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
-    containers: {
-        alignItems: 'center',
-        flex: 1,
-        backgroundColor: 'skyblue',
-        //justifyContent: 'flex-end',
-        //paddingTop: Constants.statusBarHeight,
+    container: {
+        alignContent: 'center',
+        justifyContent: 'flex-end',
+        flex: 1
+    },
+    button_container: {
+        paddingHorizontal: '5%',
+        padding: 20,
+        paddingBottom: 60,
+    },
+    title: {
+        position: 'absolute',
+        top: 60,
+        alignSelf: 'center',
+    },
+    text: {
+        fontSize: 30,
     }
 })
 
