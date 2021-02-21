@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 
 import { 
     Screen, 
     AppFormField, 
     AppForm, 
-    SubmitButton 
+    SubmitButton,
+    KeyboardView
 } from '../../components';
 import { loginWithEmail } from '../../firebase/firebase';
 
@@ -31,7 +32,7 @@ function LoginScreen({ navigation }) {
 
     return (
         <Screen>
-            <View style={styles.container}>
+        <KeyboardView  style={styles.container}>
             
             <AppForm
                 initialValues={{ 
@@ -76,8 +77,7 @@ function LoginScreen({ navigation }) {
                     onPress={() => navigation.navigate("Register")} >
                     <Text style={{color: '#9b6be8'}}>Don't have an account?</Text>
                 </TouchableOpacity>
-
-            </View>
+            </KeyboardView>
         </Screen>
     );
 }
