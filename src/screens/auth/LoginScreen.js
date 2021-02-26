@@ -1,12 +1,14 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 
 import { 
     Screen, 
     AppFormField, 
     AppForm, 
-    SubmitButton 
+    SubmitButton,
+    KeyboardView,
+    ErrorMessage
 } from '../../components';
 import { loginWithEmail } from '../../firebase/firebase';
 
@@ -18,6 +20,8 @@ const validationSchema = Yup.object().shape({
 
 
 function LoginScreen({ navigation }) {
+
+    const [loginError, setLoginError] = useState('');
 
     async function handleOnLogin(values) {
         const { email, password } = values;
@@ -31,7 +35,7 @@ function LoginScreen({ navigation }) {
 
     return (
         <Screen>
-            <View style={styles.container}>
+        <KeyboardView  style={styles.container}>
             
             <AppForm
                 initialValues={{ 
@@ -69,15 +73,20 @@ function LoginScreen({ navigation }) {
                 <View style={styles.button_container} >
                     <SubmitButton title="Login" />
                 </View>
+                <ErrorMessage error={loginError} visible={true} />
             </AppForm>
 
                 <TouchableOpacity 
-                    style={{ alignSelf: 'center', marginBottom: 25 }} 
+                    style={{ alignSelf: 'center', marginBottom: 10 }} 
                     onPress={() => navigation.navigate("Register")} >
                     <Text style={{color: '#9b6be8'}}>Don't have an account?</Text>
                 </TouchableOpacity>
-
-            </View>
+                <TouchableOpacity
+                    style={{ alignSelf: 'center', marginBottom: 25}}
+                    onPress={() => navigation.navigate("Recover")}>
+                    <Text  style={{color: '#9b6be8'}}>Forgot Password?</Text>
+                </TouchableOpacity>
+            </KeyboardView>
         </Screen>
     );
 }

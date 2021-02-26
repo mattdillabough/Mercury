@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 
 import { 
@@ -7,7 +7,8 @@ import {
     AppFormField, 
     AppForm, 
     SubmitButton,
-    ErrorMessage
+    ErrorMessage,
+    KeyboardView
 } from '../../components';
 import { registerWithEmail } from '../../firebase/firebase';
 
@@ -34,7 +35,7 @@ function RegisterScreen({ navigation }) {
 
     return (
         <Screen>
-            <View style={styles.container}>
+            <KeyboardView style={styles.container}>
 
             <View style={{paddingBottom: 140}}>
                     <Text style={styles.text} >Register Screen</Text>
@@ -95,7 +96,7 @@ function RegisterScreen({ navigation }) {
                     <Text style={{color: '#9b6be8'}}>Already have an account?</Text>
                 </TouchableOpacity>
 
-            </View>
+            </KeyboardView>
         </Screen>
     );
 }
