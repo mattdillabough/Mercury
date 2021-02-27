@@ -1,15 +1,19 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import TestScreen from '../screens/TestScreen';
+import ApplicationsTabScreen from '../screens/tabs/ApplicationsTabScreen';
+import ChatTabScreen from '../screens/tabs/ChatTabScreen';
+import ProfileTabScreen from '../screens/tabs/ProfileTabScreen';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function AppStack(props) {
     return (
-        <Stack.Navigator initialRouteName="Test" headerMode="none">
-            <Stack.Screen name="Test"    component={TestScreen} />
-        </Stack.Navigator>
+        <Tab.Navigator initialRouteName="Applications" headerMode="none">
+            <Tab.Screen name="Applications" component={ApplicationsTabScreen} />
+            <Tab.Screen name="Chat"         component={ChatTabScreen} />
+            <Tab.Screen name="Profile"      component={ProfileTabScreen} />
+        </Tab.Navigator>
     );
 }
 
