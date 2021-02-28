@@ -27,8 +27,8 @@ function RecoverScreen({ navigation }) {
             await passwordReset(email);
 
             Alert.alert(
-                "Alert title",
                 "Password Reset email sent",
+                "",
                 [
                     {
                         text: "OK", onPress: () => navigation.navigate("Login")
