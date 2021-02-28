@@ -6,6 +6,8 @@ import { Screen } from '../components';
 // Add new module 
 const modules = [
     {id: 1, value: 'Schedule'},
+    {id: 2, value: 'Module 2'},
+    {id: 3, value: 'Module 3'},
   ];
 
 const numColumns = 2;
