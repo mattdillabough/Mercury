@@ -10,7 +10,9 @@ import {
     ErrorMessage,
     KeyboardView
 } from '../../components';
-import { registerWithEmail } from '../../firebase/firebase';
+import { registerWithEmail, verifyEmail } from '../../firebase/firebase';
+
+import colors from '../../config/colors';
 
 
 const validationSchema = Yup.object().shape({
@@ -28,6 +30,7 @@ function RegisterScreen({ navigation }) {
         const { email, password } = values;
         try {
           await registerWithEmail(email, password);
+          await verifyEmail();
         } catch (error) {
           setRegisterError(error.message);
         }
@@ -93,7 +96,7 @@ function RegisterScreen({ navigation }) {
                         marginBottom: 25
                     }} 
                     onPress={() => navigation.navigate("Login")} >
-                    <Text style={{color: '#9b6be8'}}>Already have an account?</Text>
+                    <Text style={{color: colors.blue }}>Already have an account?</Text>
                 </TouchableOpacity>
 
             </KeyboardView>
