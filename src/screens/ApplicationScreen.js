@@ -1,45 +1,70 @@
 import React from 'react';
-import { Text, StyleSheet, FlatList, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, FlatList, Dimensions, TouchableOpacity, View} from 'react-native';
 
 import { Screen } from '../components';
 
-// Add new module 
 const modules = [
-    {id: 1, value: 'Schedule'},
-  ];
-
+  {id: 1, value: 'Schedule'},
+  {id: 2, value: 'module2' },
+  {id: 3, value: 'module3' }
+];
 const numColumns = 2;
-const size = Dimensions.get('window').width/numColumns;
 
 function ApplicationScreen({ navigation }) {
-    return (
-        <Screen>
-            <FlatList
-                data={modules}
-                renderItem={({item}) => (
-                    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate(item.value)} >
-                        <Text style={styles.item}>{item.value}</Text>
-                    </TouchableOpacity>
-                )}
-                keyExtractor={item => item.id}
-                numColumns={numColumns}
-            />
-        </Screen>
-    );
+
+  function formatData(data, numColumns){
+    const totalRows = Math.floor(data.length / numColumns)
+    let totalLastRow = modules.length - (totalRows * numColumns)
+
+    while (totalLastRow !== 0 && totalLastRow !== numColumns) {
+      modules.push({id: 0, value: ''})
+      totalLastRow++
+    }
+    return modules
+  }
+
+
+  
+  return (
+    <Screen style={styles.container}>
+      <FlatList
+        data={formatData(modules, numColumns)}
+        renderItem={({item}) => {
+          if(item.id === 0) {
+            return <View style={[styles.item, styles.hidden]} />
+          }
+          return(
+            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate(item.value)} >
+              <Text>{item.value}</Text>
+            </TouchableOpacity>
+          )
+        }}
+        keyExtractor={item => item.id}
+        numColumns={numColumns}
+      />
+    </Screen>
+  );
 }
 
+
 const styles = StyleSheet.create({
-    itemContainer: {
-      width: size,
-      height: size
-    },
-    item: {
-      flex: 1,
-      margin: 40,
-      textAlign: 'center',
-      textAlignVertical: 'center',
-      borderWidth: 0.7,
-    }
-  });
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  item: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 100,
+    flex: 1,
+    margin: 10,
+    borderWidth: 1
+  },
+  hidden: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+  }
+})
 
 export default ApplicationScreen;
