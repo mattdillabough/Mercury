@@ -17,7 +17,7 @@ function ProfileTabScreen(props) {
     return (
         <View style={styles.container}>
             <Text>
-                Test Screen
+                Profile Screen
             </Text>
             <Button title="logout" onPress={handleSignOut} />
         </View>

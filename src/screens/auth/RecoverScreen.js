@@ -73,7 +73,7 @@ function RecoverScreen({ navigation }) {
                 
             </KeyboardView>
             <TouchableOpacity style={styles.backButton} onPress={ () => navigation.navigate("Login") }>
-                <Ionicons name="arrow-back-circle-sharp" size={35} color={colors.blue} />
+                <Ionicons name="arrow-back-circle-sharp" size={40} color={colors.blue} />
             </TouchableOpacity>
         </Screen>
     );
