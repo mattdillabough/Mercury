@@ -69,11 +69,11 @@ function LoginScreen({ navigation }) {
         let result = await LocalAuthentication.authenticateAsync();
         if(result.success){
 
-            const username_async = await getData(USER);
-            const password_async = await getData(KEY);
+            const email = await getData(USER);
+            const password = await getData(KEY);
 
-            if(username_async !== undefined && password_async !== undefined){
-                handleOnLogin({ username_async, password_async });
+            if(email !== undefined && password !== undefined){
+                handleOnLogin({ email, password });
             }
         }
     }
