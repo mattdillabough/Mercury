@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, Text, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
+import { Ionicons } from '@expo/vector-icons';
 
 import { 
     Screen, 
@@ -11,6 +12,7 @@ import {
     ErrorMessage
 } from '../../components';
 import { passwordReset } from '../../firebase/firebase';
+import colors from '../../config/colors';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email")
@@ -27,8 +29,8 @@ function RecoverScreen({ navigation }) {
             await passwordReset(email);
 
             Alert.alert(
-                "Alert title",
                 "Password Reset email sent",
+                "",
                 [
                     {
                         text: "OK", onPress: () => navigation.navigate("Login")
@@ -70,6 +72,9 @@ function RecoverScreen({ navigation }) {
                 </AppForm>
                 
             </KeyboardView>
+            <TouchableOpacity style={styles.backButton} onPress={ () => navigation.navigate("Login") }>
+                <Ionicons name="arrow-back-circle-sharp" size={40} color={colors.blue} />
+            </TouchableOpacity>
         </Screen>
     );
 }
@@ -87,8 +92,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 60,
     },
-    text: {
-        fontSize: 30,
+    backButton: {
+        alignSelf: "flex-start",
+        margin: 15
     }
 })
 

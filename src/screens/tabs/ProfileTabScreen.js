@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { logout } from '../firebase/firebase';
+import { logout } from '../../firebase/firebase';
 
 
 
-function TestScreen(props) {
+function ProfileTabScreen(props) {
 
     async function handleSignOut() {
         try {
@@ -17,7 +17,7 @@ function TestScreen(props) {
     return (
         <View style={styles.container}>
             <Text>
-                Test Screen
+                Profile Screen
             </Text>
             <Button title="logout" onPress={handleSignOut} />
         </View>
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TestScreen;
+export default ProfileTabScreen;

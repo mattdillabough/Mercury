@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 
+import colors from '../../config/colors';
+
 import { 
     Screen, 
     AppFormField, 
@@ -79,12 +81,12 @@ function LoginScreen({ navigation }) {
                 <TouchableOpacity 
                     style={{ alignSelf: 'center', marginBottom: 10 }} 
                     onPress={() => navigation.navigate("Register")} >
-                    <Text style={{color: '#9b6be8'}}>Don't have an account?</Text>
+                    <Text style={{color: colors.blue }}>Don't have an account?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ alignSelf: 'center', marginBottom: 25}}
                     onPress={() => navigation.navigate("Recover")}>
-                    <Text  style={{color: '#9b6be8'}}>Forgot Password?</Text>
+                    <Text  style={{color: colors.blue }}>Forgot Password?</Text>
                 </TouchableOpacity>
             </KeyboardView>
         </Screen>
