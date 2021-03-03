@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, TouchableOpacity, Switch } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
 import * as Yup from 'yup';
@@ -14,7 +13,7 @@ import {
     KeyboardView,
     ErrorMessage
 } from '../../components';
-import { storeData, getData } from './helpers';
+import { storeData, getData, removeValue } from './helpers';
 import { loginWithEmail } from '../../firebase/firebase';
 
 
@@ -31,17 +30,16 @@ function LoginScreen({ navigation }) {
 
     const [loginError, setLoginError] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
-    const [scanned, setScanned] = useState(false);
 
     const toggleSwitch = () => setIsEnabled(isEnabled => !isEnabled);
 
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
-        if(!scanned){
+        if(isEnabled){
             handleFaceId();
         }
-      },[])
+      },[isEnabled])
     
     const checkDeviceForHardware = async() => {
         let compatible = await LocalAuthentication.hasHardwareAsync();
@@ -71,15 +69,12 @@ function LoginScreen({ navigation }) {
         let result = await LocalAuthentication.authenticateAsync();
         if(result.success){
 
-            setScanned(true);
+            const username_async = await getData(USER);
+            const password_async = await getData(KEY);
 
-            const username_async = getData(USER);
-            const password_async = getData(KEY);
-            console.log(username_async);
-            console.log(password_async);
-
-            handleOnLogin({ username_async, password_async });
-
+            if(username_async !== undefined && password_async !== undefined){
+                handleOnLogin({ username_async, password_async });
+            }
         }
     }
 
@@ -89,8 +84,8 @@ function LoginScreen({ navigation }) {
     
         try {
             await loginWithEmail(email, password);
-            storeData(email);
-            storeData(password);
+            await storeData(USER, email);
+            await storeData(KEY, password);
 
         } catch (error) {
           setLoginError(error.message);
@@ -144,7 +139,6 @@ function LoginScreen({ navigation }) {
                 <View style={styles.button_container} >
                     <SubmitButton title="Login" />
                 </View>
-                <ErrorMessage error={loginError} visible={true} />
             </AppForm>
 
                 <TouchableOpacity 
