@@ -10,7 +10,7 @@
     ],
     "ios": {
       "infoPlist": {
-        "NSFaceIDUsageDescription": true
+        "NSFaceIDUsageDescription": "To locally authenticate users quickly"
       }
     }
   }
