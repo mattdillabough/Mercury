@@ -10,10 +10,9 @@ import {
     AppFormField, 
     AppForm, 
     SubmitButton,
-    KeyboardView,
-    ErrorMessage
+    KeyboardView
 } from '../../components';
-import { storeData, getData, removeValue } from './helpers';
+import { storeData, getData } from './helpers';
 import { loginWithEmail } from '../../firebase/firebase';
 
 
@@ -22,8 +21,8 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(6).label("Password"),
 });
 
-const USER = "@USER";
-const KEY = "@KEY";
+const USER = "USER";
+const KEY = "KEY";
 
 
 function LoginScreen({ navigation }) {
@@ -78,7 +77,6 @@ function LoginScreen({ navigation }) {
         }
     }
 
-
     async function handleOnLogin(values) {
         const { email, password } = values;
     
@@ -129,13 +127,17 @@ function LoginScreen({ navigation }) {
                         textContentType="password"
                     />
                 </View>
-                <View style={styles.switch}>
-                    <Text>Face ID</Text>
-                    <Switch
+
+
+                <View style={styles.switchContainer}>
+                    <Switch 
                         onValueChange={toggleSwitch}
                         value={isEnabled}
                     />
+                    <Text>Face ID</Text>
                 </View>     
+
+
                 <View style={styles.button_container} >
                     <SubmitButton title="Login" />
                 </View>
@@ -151,7 +153,8 @@ function LoginScreen({ navigation }) {
                     onPress={() => navigation.navigate("Recover")}>
                     <Text  style={{color: colors.blue }}>Forgot Password?</Text>
                 </TouchableOpacity>
-            </KeyboardView>
+
+        </KeyboardView>
         </Screen>
     );
 }
@@ -173,9 +176,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 30,
     },
-    switch: {
-        alignSelf: 'center',
-    }
+    switchContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
 })
 
 export default LoginScreen;
