@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Alert, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 import { Ionicons } from '@expo/vector-icons';
 

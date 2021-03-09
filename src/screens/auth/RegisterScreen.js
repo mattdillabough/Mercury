@@ -93,11 +93,11 @@ function RegisterScreen({ navigation }) {
                         textContentType="password"
                     />
                 </View>
-                
+                <ErrorMessage error={registerError} visible={true} />
                 <View style={styles.button_container} >
                     <SubmitButton title="Register" />
                 </View>
-                <ErrorMessage error={registerError} visible={true} />
+                
             </AppForm>
                 <TouchableOpacity 
                     style={{
