@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 
-import { 
-    Screen, 
-    AppFormField, 
-    AppForm, 
+import {
+    Screen,
+    AppFormField,
+    AppForm,
     SubmitButton,
     ErrorMessage,
     KeyboardView
 } from '../../components';
-import { registerWithEmail, verifyEmail } from '../../firebase/firebase';
+import { registerWithEmail, verifyEmail, grantRole } from '../../firebase/firebase';
 import { storeData } from './helpers';
 import colors from '../../config/colors';
 
@@ -34,78 +34,79 @@ function RegisterScreen({ navigation }) {
         const { email, password } = values;
         try {
             await registerWithEmail(email, password);
-            
             await storeData(USER, email);
             await storeData(KEY, password);
-
             verifyEmail();
 
+
+            //await grantRole();
+
         } catch (error) {
-          setRegisterError(error.message);
+            setRegisterError(error.message);
         }
-      }
+    }
 
     return (
         <Screen>
             <KeyboardView style={styles.container}>
 
-            <View style={{paddingBottom: 140}}>
+                <View style={{ paddingBottom: 140 }}>
                     <Text style={styles.text} >Register Screen</Text>
                 </View>
-            
-            <AppForm
-                initialValues={{ 
-                    email: '', 
-                    password: '',
-                    confirmPassword: ''
+
+                <AppForm
+                    initialValues={{
+                        email: '',
+                        password: '',
+                        confirmPassword: ''
                     }}
-                onSubmit={values => handleOnSignUp(values)}
-                validationSchema={validationSchema}
-            >
+                    onSubmit={values => handleOnSignUp(values)}
+                    validationSchema={validationSchema}
+                >
 
 
-                <View style={styles.input_container}>
-                    <AppFormField 
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        icon="email"
-                        keyboardType="email-address"
-                        name="email"
-                        placeholder="Email Address"  
-                        textContentType="emailAddress" 
-                    />
-                    <AppFormField
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        icon="lock" 
-                        name="password"
-                        placeholder="Password"
-                        secureTextEntry={true}
-                        textContentType="password"
-                    />
-                    <AppFormField
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        icon="lock"
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        secureTextEntry={true}
-                        textContentType="password"
-                    />
-                </View>
-                <ErrorMessage error={registerError} visible={true} />
-                <View style={styles.button_container} >
-                    <SubmitButton title="Register" />
-                </View>
-                
-            </AppForm>
-                <TouchableOpacity 
+                    <View style={styles.input_container}>
+                        <AppFormField
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="email"
+                            keyboardType="email-address"
+                            name="email"
+                            placeholder="Email Address"
+                            textContentType="emailAddress"
+                        />
+                        <AppFormField
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="lock"
+                            name="password"
+                            placeholder="Password"
+                            secureTextEntry={true}
+                            textContentType="password"
+                        />
+                        <AppFormField
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="lock"
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            secureTextEntry={true}
+                            textContentType="password"
+                        />
+                    </View>
+                    <ErrorMessage error={registerError} visible={true} />
+                    <View style={styles.button_container} >
+                        <SubmitButton title="Register" />
+                    </View>
+
+                </AppForm>
+                <TouchableOpacity
                     style={{
-                        alignSelf: 'center', 
+                        alignSelf: 'center',
                         marginBottom: 25
-                    }} 
+                    }}
                     onPress={() => navigation.navigate("Login")} >
-                    <Text style={{color: colors.blue }}>Already have an account?</Text>
+                    <Text style={{ color: colors.blue }}>Already have an account?</Text>
                 </TouchableOpacity>
 
             </KeyboardView>
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     input_container: {
-        paddingHorizontal: '5%',        
+        paddingHorizontal: '5%',
     },
     text: {
         alignSelf: 'center',
