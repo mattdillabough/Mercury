@@ -11,8 +11,9 @@ import {
     KeyboardView
 } from '../../components';
 import { registerWithEmail, verifyEmail } from '../../firebase/firebase';
-
+import { storeData } from './helpers';
 import colors from '../../config/colors';
+
 
 
 const validationSchema = Yup.object().shape({
@@ -20,6 +21,9 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(6).label("Password"),
     confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Confirm Password must match Password').required('Confirm Password is required')
 });
+
+const USER = "USER";
+const KEY = "KEY";
 
 
 function RegisterScreen({ navigation }) {
@@ -29,8 +33,13 @@ function RegisterScreen({ navigation }) {
     async function handleOnSignUp(values) {
         const { email, password } = values;
         try {
-          await registerWithEmail(email, password);
-          await verifyEmail();
+            await registerWithEmail(email, password);
+            
+            await storeData(USER, email);
+            await storeData(KEY, password);
+
+            verifyEmail();
+
         } catch (error) {
           setRegisterError(error.message);
         }
@@ -84,11 +93,11 @@ function RegisterScreen({ navigation }) {
                         textContentType="password"
                     />
                 </View>
-                
+                <ErrorMessage error={registerError} visible={true} />
                 <View style={styles.button_container} >
                     <SubmitButton title="Register" />
                 </View>
-                <ErrorMessage error={registerError} visible={true} />
+                
             </AppForm>
                 <TouchableOpacity 
                     style={{

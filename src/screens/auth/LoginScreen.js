@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Switch } from 'react-native';
+import * as LocalAuthentication from 'expo-local-authentication';
 import * as Yup from 'yup';
 
 import colors from '../../config/colors';
@@ -9,9 +10,9 @@ import {
     AppFormField, 
     AppForm, 
     SubmitButton,
-    KeyboardView,
-    ErrorMessage
+    KeyboardView
 } from '../../components';
+import { storeData, getData } from './helpers';
 import { loginWithEmail } from '../../firebase/firebase';
 
 
@@ -20,20 +21,75 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(6).label("Password"),
 });
 
+const USER = "USER";
+const KEY = "KEY";
+
 
 function LoginScreen({ navigation }) {
 
     const [loginError, setLoginError] = useState('');
+    const [isEnabled, setIsEnabled] = useState(false);
+
+    const toggleSwitch = () => setIsEnabled(isEnabled => !isEnabled);
+
+    useEffect(() => {
+        checkDeviceForHardware();
+        checkForFingerprints();
+        if(isEnabled){
+            handleFaceId();
+        }
+      },[isEnabled])
+    
+    const checkDeviceForHardware = async() => {
+        let compatible = await LocalAuthentication.hasHardwareAsync();
+        if(compatible){
+            console.log('Compatible device')
+        }
+        else {
+            console.log('does not have the hardware')
+        }
+      }
+
+    const checkForFingerprints = async () => {
+        let fingerprints = await LocalAuthentication.isEnrolledAsync();
+        if(!fingerprints){
+            console.log("no fingerprints found")
+        }
+        else{
+            console.log("fingerprints found")
+        }
+    };
+
+    handleFaceId = async() => {
+        handleAuth();
+    }
+
+    handleAuth = async() => {
+        let result = await LocalAuthentication.authenticateAsync();
+        if(result.success){
+
+            const email = await getData(USER);
+            const password = await getData(KEY);
+
+            if(email !== undefined && password !== undefined){
+                handleOnLogin({ email, password });
+            }
+        }
+    }
 
     async function handleOnLogin(values) {
         const { email, password } = values;
     
         try {
-          await loginWithEmail(email, password);
+            await loginWithEmail(email, password);
+            await storeData(USER, email);
+            await storeData(KEY, password);
+
         } catch (error) {
           setLoginError(error.message);
         }
       }
+
 
     return (
         <Screen>
@@ -71,11 +127,20 @@ function LoginScreen({ navigation }) {
                         textContentType="password"
                     />
                 </View>
-     
+
+
+                <View style={styles.switchContainer}>
+                    <Switch 
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
+                    <Text>Face ID</Text>
+                </View>     
+
+
                 <View style={styles.button_container} >
                     <SubmitButton title="Login" />
                 </View>
-                <ErrorMessage error={loginError} visible={true} />
             </AppForm>
 
                 <TouchableOpacity 
@@ -88,7 +153,8 @@ function LoginScreen({ navigation }) {
                     onPress={() => navigation.navigate("Recover")}>
                     <Text  style={{color: colors.blue }}>Forgot Password?</Text>
                 </TouchableOpacity>
-            </KeyboardView>
+
+        </KeyboardView>
         </Screen>
     );
 }
@@ -109,7 +175,11 @@ const styles = StyleSheet.create({
     text: {
         alignSelf: 'center',
         fontSize: 30,
-    }
+    },
+    switchContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
 })
 
 export default LoginScreen;

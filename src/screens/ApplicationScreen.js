@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, StyleSheet, FlatList, Dimensions, TouchableOpacity, View} from 'react-native';
 
 import { Screen } from '../components';
