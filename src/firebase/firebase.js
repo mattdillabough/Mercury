@@ -24,21 +24,18 @@ export const passwordReset = email => auth.sendPasswordResetEmail(email);
 
 export const verifyEmail = () => {
   let user = auth.currentUser;
-
   user.sendEmailVerification();
 }
 ///////////////////////////////////////////////////////////////////////////////////
-export const grantRole = async() => {
-
+const getToken = async() => {
   const token = await auth.currentUser.getIdToken(true);
-
-  const data = await getUserRole(token);
-
-  console.log(data)
+  return token
 }
 
 
-async function getUserRole(token) {
+export const grantDefaultRole = async() => {
+
+  const token = await getToken();
 
   let url = "http://192.168.1.13:5000/grantRole";
 
@@ -49,5 +46,6 @@ async function getUserRole(token) {
 
   // Axios is used instead of fetch as it gave me weird results
   let data = await axios.get(url, {headers: headers}).then(response => response.data);
-  return data;
+  console.log(data);
+  //return data;
 }
