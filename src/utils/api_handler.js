@@ -17,8 +17,7 @@ export const grantDefaultRole = async() => {
     }
   
     // Axios is used instead of fetch as it gave me weird results
-    let data = await axios.get(url_endpoint, {headers: headers}).then(response => response.data);
-    console.log(data);
+    axios.get(url_endpoint, {headers: headers}).then(response => response.data);
 }
 
 export const addEvent = async(data) => {
@@ -34,6 +33,8 @@ export const addEvent = async(data) => {
         'Authorization': token
     }
 
-    axios.post(url_endpoint, {data: data}, { headers: headers}).catch(error => console.error(error))
+    axios.post(url_endpoint, {data: data}, { headers: headers})
+    .catch(error => console.error(error))
 }
+
 
