@@ -10,7 +10,11 @@ import {
     ErrorMessage,
     KeyboardView
 } from '../../components';
-import { registerWithEmail, verifyEmail, grantRole } from '../../firebase/firebase';
+import { 
+    registerWithEmail, 
+    verifyEmail, 
+    grantDefaultRole 
+} from '../../firebase/firebase';
 import { storeData } from './helpers';
 import colors from '../../config/colors';
 
@@ -38,8 +42,7 @@ function RegisterScreen({ navigation }) {
             await storeData(KEY, password);
             verifyEmail();
 
-
-            //await grantRole();
+            await grantDefaultRole();
 
         } catch (error) {
             setRegisterError(error.message);

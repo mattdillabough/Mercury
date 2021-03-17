@@ -12,7 +12,7 @@ function ScheduleScreen(props) {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        auth.currentUser.getIdTokenResult()
+        auth.currentUser.getIdTokenResult(true)
             .then((idTokenResult) => {
                 if(!!idTokenResult.claims.admin) {
                     setMessage("You're an admin");
