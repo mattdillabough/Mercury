@@ -10,11 +10,8 @@ import {
     ErrorMessage,
     KeyboardView
 } from '../../components';
-import { 
-    registerWithEmail, 
-    verifyEmail, 
-    grantDefaultRole 
-} from '../../firebase/firebase';
+import { registerWithEmail, verifyEmail } from '../../firebase/firebase';
+import { grantDefaultRole } from '../../utils/api_handler';
 import { storeData } from './helpers';
 import colors from '../../config/colors';
 

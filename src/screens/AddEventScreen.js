@@ -10,6 +10,7 @@ import {
     KeyboardView,
     SubmitButton
 } from '../components';
+import { addEvent } from '../utils/api_handler';
 
 const validationSchema = Yup.object().shape({
     eventTitle: Yup.string().required().label("Event Title"),
@@ -19,6 +20,11 @@ const validationSchema = Yup.object().shape({
 })
 
 function AddEventScreen(props) {
+
+    async function handleSubmit(values) {
+        await addEvent(values);
+    }
+
     return (
         <Screen>
         <KeyboardView>
@@ -30,7 +36,7 @@ function AddEventScreen(props) {
                     eventDate: '',
                     eventDescription: ''
                 }}
-                onSubmit={values => console.log(values)}
+                onSubmit={values => handleSubmit(values)}
                 validationSchema={validationSchema} 
                 >
                     <View style={styles.input_Container}>
