@@ -1,32 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
-import { Screen } from '../components';
-import { auth } from '../firebase/firebase';
+import { Screen, EventCard } from '../components';
+import { getAllEvents } from '../utils/api_handler';
+import { storeJsonData, getJsonData } from '../utils/cache_handler';
 
 // Flatlist of upcoming events
 // When event clicked, navigate to EventDetailScreen
 
 function ScheduleScreen(props) {
 
-    const [message, setMessage] = useState('');
+    const [events, setEvents] = useState([]);
+    const [refresh, setRefresh] = useState(true);
 
     useEffect(() => {
-        auth.currentUser.getIdTokenResult(true)
-            .then((idTokenResult) => {
-                if(!!idTokenResult.claims.admin) {
-                    setMessage("You're an admin");
-                }
-                else {
-                    setMessage("You're a user");
-                }
-            }).catch((error) => {
-                console.log(error);
-            })
-    })
+        fetchEvents();
+    },[])
+
+    const fetchEvents = async() => {
+
+        if(getJsonData('@events') !== null){
+            await getJsonData('@events').then(data => {
+                setEvents(data);
+                setRefresh(false);
+            }).catch(() => setRefresh(false))
+        }
+        else {
+            await getUpdates();
+        }
+    }
+
+    const getUpdates = async() => {
+        
+        await getAllEvents().then(data => {
+            setEvents(data);
+            setRefresh(false);
+            storeJsonData('@events', data)
+        }).catch(() => setRefresh(false))
+    }
+
+    const handleRefresh = async() => {
+        setRefresh(true); 
+        getUpdates();
+    }
+
     return (
         <Screen>
-            <Text>{message}</Text>
+            <FlatList
+                data={events}
+                renderItem={({ item }) => (
+                    <EventCard event={item.data} />
+                )}
+                keyExtractor={item => item.id}
+                refreshing={refresh}
+                onRefresh={handleRefresh}
+            />
         </Screen>
     );
 }

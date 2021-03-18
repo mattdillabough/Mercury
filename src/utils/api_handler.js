@@ -38,3 +38,16 @@ export const addEvent = async(data) => {
 }
 
 
+export const getAllEvents = async() => {
+    const token = await getToken();
+    const url_endpoint = url + "/getAllEvents";
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+
+    let data = await axios.get(url_endpoint, {headers: headers}).then(response => response.data);
+    return data;
+}
+
