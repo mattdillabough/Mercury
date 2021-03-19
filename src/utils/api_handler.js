@@ -33,14 +33,14 @@ export const addEvent = async(data) => {
         'Authorization': token
     }
 
-    axios.post(url_endpoint, {data: data}, { headers: headers})
-    .catch(error => console.error(error))
+    axios.post(url_endpoint, {data: data}, {headers: headers})
+    .catch(error => console.error(error.message))
 }
 
 
-export const getAllEvents = async() => {
+export const getRecentEvents = async() => {
     const token = await getToken();
-    const url_endpoint = url + "/getAllEvents";
+    const url_endpoint = url + "/getRecentEvents";
 
     const headers = {
         'Content-Type': 'application/json',
@@ -48,6 +48,24 @@ export const getAllEvents = async() => {
     }
 
     let data = await axios.get(url_endpoint, {headers: headers}).then(response => response.data);
+    return data;
+}
+
+
+export const getNextRecentEvents = async(last_doc) => {
+
+    const token = await getToken();
+    const url_endpoint = url + "/getNextEventPage";
+    
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+        'TimeStamp': last_doc.timestamp
+    }
+
+    let data = axios.get(url_endpoint, {headers: headers}).then(response => response.data)
+    .catch(error => console.error(error.message));
+
     return data;
 }
 

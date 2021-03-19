@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
 import { Screen, EventCard } from '../components';
-import { getAllEvents } from '../utils/api_handler';
+import { getRecentEvents, getNextRecentEvents } from '../utils/api_handler';
 import { storeJsonData, getJsonData } from '../utils/cache_handler';
 
 // Flatlist of upcoming events
@@ -13,16 +13,24 @@ function ScheduleScreen(props) {
     const [events, setEvents] = useState([]);
     const [refresh, setRefresh] = useState(true);
 
+    // Saving last document retrieved from getRecentEvents, used for pagination in fetching next batch when reaching end of flatlist
+    const [lastDocument, setLastDocument] = useState({});
+
     useEffect(() => {
         fetchEvents();
     },[])
 
+    // Fetch events from cache if available
+    // Fetch events from firestore db if it isn't in cache
     const fetchEvents = async() => {
 
         if(getJsonData('@events') !== null){
             await getJsonData('@events').then(data => {
                 setEvents(data);
                 setRefresh(false);
+
+                const last_doc = data[data.length - 1];
+                setLastDocument(last_doc);
             }).catch(() => setRefresh(false))
         }
         else {
@@ -32,13 +40,23 @@ function ScheduleScreen(props) {
 
     const getUpdates = async() => {
         
-        await getAllEvents().then(data => {
+        await getRecentEvents().then(data => {
             setEvents(data);
             setRefresh(false);
-            storeJsonData('@events', data)
+            storeJsonData('@events', data);
+
+            const last_doc = data[data.length - 1];
+            setLastDocument(last_doc);
+
         }).catch(() => setRefresh(false))
     }
 
+    const handleLoadMore = async() => {
+        const data = await getNextRecentEvents(lastDocument);
+        setEvents(data);
+    }
+
+    // For user refreshing the flatist, it will fetch newest updates
     const handleRefresh = async() => {
         setRefresh(true); 
         getUpdates();
@@ -54,16 +72,11 @@ function ScheduleScreen(props) {
                 keyExtractor={item => item.id}
                 refreshing={refresh}
                 onRefresh={handleRefresh}
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={1}
             />
         </Screen>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-})
 
 export default ScheduleScreen;
