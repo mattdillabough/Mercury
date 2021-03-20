@@ -53,7 +53,7 @@ function ScheduleScreen(props) {
 
     const handleLoadMore = async() => {
         const data = await getNextRecentEvents(lastDocument);
-        setEvents(data);
+        setEvents(events => events.concat(data));
     }
 
     // For user refreshing the flatist, it will fetch newest updates
@@ -73,7 +73,7 @@ function ScheduleScreen(props) {
                 refreshing={refresh}
                 onRefresh={handleRefresh}
                 onEndReached={handleLoadMore}
-                onEndReachedThreshold={1}
+                onEndReachedThreshold={0}
             />
         </Screen>
     );

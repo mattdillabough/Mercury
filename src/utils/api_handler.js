@@ -60,7 +60,7 @@ export const getNextRecentEvents = async(last_doc) => {
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': token,
-        'TimeStamp': last_doc.timestamp
+        'ID': last_doc.id
     }
 
     let data = axios.get(url_endpoint, {headers: headers}).then(response => response.data)
