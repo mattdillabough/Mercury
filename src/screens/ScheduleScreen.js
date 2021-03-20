@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 
 import { Screen, EventCard } from '../components';
 import { getRecentEvents, getNextRecentEvents } from '../utils/api_handler';
@@ -8,7 +8,7 @@ import { storeJsonData, getJsonData } from '../utils/cache_handler';
 // Flatlist of upcoming events
 // When event clicked, navigate to EventDetailScreen
 
-function ScheduleScreen(props) {
+function ScheduleScreen({ navigation }) {
 
     const [events, setEvents] = useState([]);
     const [refresh, setRefresh] = useState(true);
@@ -52,8 +52,14 @@ function ScheduleScreen(props) {
     }
 
     const handleLoadMore = async() => {
-        const data = await getNextRecentEvents(lastDocument);
-        setEvents(events => events.concat(data));
+
+        await getNextRecentEvents(lastDocument).then(data => {
+            setEvents(events => events.concat(data));
+
+            const last_doc = data[data.length - 1];
+            setLastDocument(last_doc);
+        }).catch(error => console.error(error.message));
+
     }
 
     // For user refreshing the flatist, it will fetch newest updates
@@ -67,7 +73,9 @@ function ScheduleScreen(props) {
             <FlatList
                 data={events}
                 renderItem={({ item }) => (
-                    <EventCard event={item.data} />
+                    <TouchableOpacity onPress={() => navigation.navigate('Event', {article: item})}>
+                        <EventCard event={item.data} />
+                    </TouchableOpacity>
                 )}
                 keyExtractor={item => item.id}
                 refreshing={refresh}

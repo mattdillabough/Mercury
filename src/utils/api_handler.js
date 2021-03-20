@@ -18,6 +18,7 @@ export const grantDefaultRole = async() => {
   
     // Axios is used instead of fetch as it gave me weird results
     axios.get(url_endpoint, {headers: headers}).then(response => response.data);
+    return;
 }
 
 export const addEvent = async(data) => {
@@ -35,6 +36,7 @@ export const addEvent = async(data) => {
 
     axios.post(url_endpoint, {data: data}, {headers: headers})
     .catch(error => console.error(error.message))
+    return;
 }
 
 
@@ -67,5 +69,21 @@ export const getNextRecentEvents = async(last_doc) => {
     .catch(error => console.error(error.message));
 
     return data;
+}
+
+
+export const deleteEvent = async(event_id) => {
+    
+    const token = await getToken();
+    const url_endpoint = url + "/deleteEvent";
+
+    const headers = {
+        'Authorization': token
+    }
+
+    axios.delete(url_endpoint, {data: { id: event_id }}, {headers: headers}).then(response => console.log(response))
+    .catch(error => console.error(error.message));
+    
+    return;
 }
 
