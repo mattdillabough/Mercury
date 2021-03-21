@@ -13,10 +13,18 @@ import {
 import { addEvent } from '../utils/api_handler';
 
 const validationSchema = Yup.object().shape({
-    eventTitle: Yup.string().required().label("Event Title"),
-    eventOrganizer: Yup.string().required().label("Event Organizer"),
-    eventDate: Yup.date().required().label("Event Date"),
-    eventDescription: Yup.string().required().label("Event Description")
+    eventTitle: Yup.string()
+        .required()
+        .label("Event Title"),
+    eventOrganizer: Yup.string()
+        .required()
+        .label("Event Organizer"),
+    eventDate: Yup.date()
+        .required()
+        .label("Event Date"),
+    eventDescription: Yup.string()
+        .required()
+        .label("Event Description")
 })
 
 function AddEventScreen(props) {

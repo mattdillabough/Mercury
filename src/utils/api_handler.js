@@ -81,7 +81,7 @@ export const deleteEvent = async(event_id) => {
         'Authorization': token
     }
 
-    axios.delete(url_endpoint, {data: { id: event_id }}, {headers: headers}).then(response => console.log(response))
+    axios.delete(url_endpoint, {data: { id: event_id }}, {headers: headers})
     .catch(error => console.error(error.message));
     
     return;

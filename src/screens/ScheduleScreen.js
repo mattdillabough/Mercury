@@ -58,7 +58,6 @@ function ScheduleScreen({ navigation }) {
             await getNextRecentEvents(lastDocument).then(data => {
                 if (Array.isArray(data) && !data.length) {
                     setIsEmpty(true);
-                    console.log("testing")
                 }
                 else {
                     setEvents(events => events.concat(data));

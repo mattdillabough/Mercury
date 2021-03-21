@@ -17,8 +17,14 @@ import { loginWithEmail } from '../../firebase/firebase';
 
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().required().email().label("Email"),
-    password: Yup.string().required().min(6).label("Password"),
+    email: Yup.string()
+        .required()
+        .email()
+        .label("Email"),
+    password: Yup.string()
+        .required()
+        .min(6)
+        .label("Password"),
 });
 
 const USER = "USER";
