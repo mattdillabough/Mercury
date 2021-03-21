@@ -15,6 +15,7 @@ function ScheduleScreen({ navigation }) {
 
     // Saving last document retrieved from getRecentEvents, used for pagination in fetching next batch when reaching end of flatlist
     const [lastDocument, setLastDocument] = useState({});
+    const [isEmpty, setIsEmpty] = useState(false);
 
     useEffect(() => {
         fetchEvents();
@@ -53,13 +54,20 @@ function ScheduleScreen({ navigation }) {
 
     const handleLoadMore = async() => {
 
-        await getNextRecentEvents(lastDocument).then(data => {
-            setEvents(events => events.concat(data));
-
-            const last_doc = data[data.length - 1];
-            setLastDocument(last_doc);
-        }).catch(error => console.error(error.message));
-
+        if ( isEmpty === false ) {
+            await getNextRecentEvents(lastDocument).then(data => {
+                if (Array.isArray(data) && !data.length) {
+                    setIsEmpty(true);
+                    console.log("testing")
+                }
+                else {
+                    setEvents(events => events.concat(data));
+    
+                    const last_doc = data[data.length - 1];
+                    setLastDocument(last_doc);
+                }
+            }).catch(error => console.error(error.message));
+        }
     }
 
     // For user refreshing the flatist, it will fetch newest updates
