@@ -37,3 +37,12 @@ export async function getJsonData(key) {
         console.error(error.message)
     }
 }
+
+
+export async function removeData(key) {
+    try {
+        await AsyncStorage.removeItem(key);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
