@@ -44,8 +44,8 @@ function ScheduleStack({ navigation }) {
                     )
                 }
             }} />
-            <Stack.Screen   name="Add Event"      component={AddEventScreen} />
-            <Stack.Screen   name="Event"    component={EventDetailScreen} />
+            <Stack.Screen   name="Add Event"    component={AddEventScreen} />
+            <Stack.Screen   name="Event"        component={EventDetailScreen} />
         </Stack.Navigator>
     );
 }

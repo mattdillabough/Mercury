@@ -25,8 +25,9 @@ function ScheduleScreen({ navigation }) {
     // Fetch events from firestore db if it isn't in cache
     const fetchEvents = async() => {
 
-        if(getJsonData('@events') !== null){
+        if(await getJsonData('@events') !== null){
             await getJsonData('@events').then(data => {
+
                 setEvents(data);
                 setRefresh(false);
 
@@ -52,6 +53,7 @@ function ScheduleScreen({ navigation }) {
         }).catch(() => setRefresh(false))
     }
 
+    // Load more events when reached end of current list
     const handleLoadMore = async() => {
 
         if ( isEmpty === false ) {

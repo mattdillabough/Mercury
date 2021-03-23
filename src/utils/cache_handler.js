@@ -31,7 +31,7 @@ export async function getData(key) {
 
 export async function getJsonData(key) {
     try {
-        const jsonValue = await AsyncStorage.getItem(key)
+        const jsonValue = await AsyncStorage.getItem(key);
         return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (error) {
         console.error(error.message)
@@ -42,6 +42,16 @@ export async function getJsonData(key) {
 export async function removeData(key) {
     try {
         await AsyncStorage.removeItem(key);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+
+export async function removeKey() {
+    const keys = ['@events']
+    try {
+        await AsyncStorage.multiRemove(keys);
     } catch (error) {
         console.error(error.message);
     }

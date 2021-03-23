@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 import { logout } from '../../firebase/firebase';
-import { removeData } from '../../utils/cache_handler';
+import { removeData, removeKey } from '../../utils/cache_handler';
 
 
 
@@ -11,6 +11,7 @@ function ProfileTabScreen(props) {
     async function handleSignOut() {
         try {
             await removeData('@events');
+            await removeKey();
             await logout();
         } catch (error) {
           console.log(error);

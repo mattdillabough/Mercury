@@ -51,10 +51,18 @@ function EventDetailScreen(props) {
 
             <View style={styles.buttonContainer}>
                 <View>
-                    {isAuthor && <AppButton title="Edit" onPress={() => console.log("Editing")} />}
+                    {
+                        isAuthor ? 
+                        <AppButton title="Edit" onPress={() => console.log("Editing")} /> : 
+                        <AppButton name="Attend" onPress={() => console.log("attending event")} /> 
+                    }
                 </View>
                 <View>
-                    {isAuthor && <AppButton style={styles.delete} title="Delete" onPress={deleteAlert} />}
+                    {
+                        isAuthor ? 
+                        <AppButton style={styles.delete} title="Delete" onPress={deleteAlert}/> : 
+                        <AppButton style={styles.delete} name="Abstain" onPress={() => console.log("Not attending event")} /> 
+                    }
                 </View>       
             </View>         
         </Screen>
