@@ -10,6 +10,7 @@ import {
     KeyboardView,
     SubmitButton
 } from '../components';
+import { editEvent } from '../utils/api_handler';
 
 const validationSchema = Yup.object().shape({
     eventTitle: Yup.string(),
@@ -21,10 +22,17 @@ const validationSchema = Yup.object().shape({
 function EditEventScreen(props) {
 
     const event = props.route.params.event;
+    const id = event.id;
     const title = event.data.eventTitle;
     const organizer = event.data.eventOrganizer;
     const date = event.data.eventDate;
     const description = event.data.eventDescription;
+
+    async function handleSubmit(values) {
+        values["id"] = id;
+        await editEvent(values);
+        props.navigation.navigate("Event")
+    }
 
     return (
         <Screen>
@@ -34,10 +42,10 @@ function EditEventScreen(props) {
                         initialValues={{
                             eventTitle: title,
                             eventOrganizer: organizer,
-                            eventDate: event.data.eventDate,
+                            eventDate: date,
                             eventDescription: description
                         }}
-                        onSubmit={values => console.log(values)}
+                        onSubmit={values => handleSubmit(values)}
                         validationSchema={validationSchema}
                         >
                         <View style={styles.container}>
