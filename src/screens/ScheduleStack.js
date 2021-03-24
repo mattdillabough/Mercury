@@ -6,12 +6,14 @@ import { IconButton } from '../components';
 import { auth } from '../firebase/firebase';
 import ScheduleScreen from './ScheduleScreen';
 import AddEventScreen from './AddEventScreen';
+import EditEventScreen from './EditEventScreen';
 import EventDetailScreen from './EventDetailScreen';
 
 
 /*
 ScheduleScreen    = Flatlist of all upcoming events
 AddEventScreen    = Create a new event, roles only
+EditEventScreen   = Editing an event, available to creator of event only
 EventDetailScreen = Information about selected event, viewable by all users
 */
 
@@ -45,6 +47,7 @@ function ScheduleStack({ navigation }) {
                 }
             }} />
             <Stack.Screen   name="Add Event"    component={AddEventScreen} />
+            <Stack.Screen   name="Edit Event"   component={EditEventScreen}/>
             <Stack.Screen   name="Event"        component={EventDetailScreen} />
         </Stack.Navigator>
     );

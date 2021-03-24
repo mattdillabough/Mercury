@@ -53,7 +53,7 @@ function EventDetailScreen(props) {
                 <View>
                     {
                         isAuthor ? 
-                        <AppButton title="Edit" onPress={() => console.log("Editing")} /> : 
+                        <AppButton title="Edit" onPress={() => props.navigation.navigate("Edit Event", {event: event})} /> : 
                         <AppButton name="Attend" onPress={() => console.log("attending event")} /> 
                     }
                 </View>

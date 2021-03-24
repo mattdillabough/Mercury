@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import * as Yup from 'yup';
 
 import { 
@@ -65,7 +65,7 @@ function AddEventScreen(props) {
                             blurOnSubmit={false}
                             placeholder="Event Description"
                         />
-                        <SubmitButton title="submit" />
+                        <SubmitButton title="Submit" />
                     </View>
                 </AppForm>
             </ScrollView>
