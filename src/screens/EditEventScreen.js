@@ -5,10 +5,11 @@ import * as Yup from 'yup';
 import { 
     Screen, 
     AppForm,
-    AppFormField,
+    EditFormField,
     AppFormBox,
     KeyboardView,
-    SubmitButton
+    SubmitButton,
+    IconButton
 } from '../components';
 import { editEvent } from '../utils/api_handler';
 
@@ -20,6 +21,11 @@ const validationSchema = Yup.object().shape({
 })
 
 function EditEventScreen(props) {
+
+    const [editTitle, setEditTitle] = useState(false);
+    const [editOrganizer, setEditOrganizer] = useState(false);
+    const [editDate, setEditDate] = useState(false);
+    const [editDescription, setEditDescription] = useState(false);
 
     const event = props.route.params.event;
     const id = event.id;
@@ -51,30 +57,44 @@ function EditEventScreen(props) {
                         >
                         <View style={styles.container}>
                             <Text>Event Title</Text>
-                            <AppFormField
+                            <EditFormField
+                                editable={editTitle}
+                                icon="create-sharp"
                                 name="eventTitle"
+                                onPress={() => setEditTitle(true)}
                                 placeholder={title}
-                                style={styles.formField}
+                                style={styles.formField}                              
                             />
                             <Text>Event Organizer</Text>
-                            <AppFormField
+                            <EditFormField
+                                editable={editOrganizer}
+                                icon="create-sharp"
                                 name="eventOrganizer"
+                                onPress={() => setEditOrganizer(true)}
                                 placeholder={organizer}
                                 style={styles.formField}
                             />
                             <Text>Event Date</Text>
-                            <AppFormField
+                            <EditFormField
+                                editable={editDate}
+                                icon="create-sharp"
                                 name="eventDate"
+                                onPress={() => setEditDate(true)}
                                 placeholder={date}
                                 style={styles.formField}
                             />
-                            <Text>Event Description</Text>
+                            <View style={styles.formBoxEdit}>
+                                <Text>Event Description</Text>
+                                <IconButton name="create-sharp" onPress={() => setEditDescription(true)}/>
+                            </View>                       
                             <AppFormBox
+                                editable={editDescription}
                                 name="eventDescription"
                                 blurOnSubmit={false}
                                 placeholder={description}
+                                style={styles.formField}
                             />
-                            <SubmitButton title="Save"/>
+                            <SubmitButton title="Save changes"/>
                         </View>
                     </AppForm>
                 </ScrollView>
@@ -89,6 +109,10 @@ const styles = StyleSheet.create({
     },
     formField: {
         padding: 1
+    },
+    formBoxEdit: {
+        flexDirection: "row",
+        justifyContent: "space-between",
     }
 })
 

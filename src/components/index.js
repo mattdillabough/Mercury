@@ -12,3 +12,4 @@ export { default as AppFormField } from './AppFormField';
 export { default as AppFormBox } from './AppFormBox';
 export { default as ErrorMessage } from './ErrorMessage';
 export { default as SubmitButton } from './SubmitButton';
+export { default as EditFormField } from './EditFormField';

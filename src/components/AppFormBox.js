@@ -4,11 +4,11 @@ import { StyleSheet, View, TextInput } from 'react-native';
 
 import ErrorMessage from './ErrorMessage';
 
-function AppFormBox({ name, ...otherProps }) {
+function AppFormBox({ name, style,...otherProps }) {
     const {setFieldTouched, handleChange, errors, touched } = useFormikContext();
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <TextInput 
                 style={styles.text} 
                 multiline={true} 
