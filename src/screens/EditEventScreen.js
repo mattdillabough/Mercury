@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, Text } from 'react-native';
 import * as Yup from 'yup';
 
 import { 
@@ -30,6 +30,7 @@ function EditEventScreen(props) {
 
     async function handleSubmit(values) {
         values["id"] = id;
+        console.log(values);
         await editEvent(values);
         props.navigation.navigate("Event")
     }
@@ -49,24 +50,31 @@ function EditEventScreen(props) {
                         validationSchema={validationSchema}
                         >
                         <View style={styles.container}>
+                            <Text>Event Title</Text>
                             <AppFormField
                                 name="eventTitle"
                                 placeholder={title}
+                                style={styles.formField}
                             />
+                            <Text>Event Organizer</Text>
                             <AppFormField
                                 name="eventOrganizer"
                                 placeholder={organizer}
+                                style={styles.formField}
                             />
+                            <Text>Event Date</Text>
                             <AppFormField
                                 name="eventDate"
                                 placeholder={date}
+                                style={styles.formField}
                             />
+                            <Text>Event Description</Text>
                             <AppFormBox
                                 name="eventDescription"
                                 blurOnSubmit={false}
                                 placeholder={description}
                             />
-                            <SubmitButton title="Submit"/>
+                            <SubmitButton title="Save"/>
                         </View>
                     </AppForm>
                 </ScrollView>
@@ -78,6 +86,9 @@ function EditEventScreen(props) {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: '5%'
+    },
+    formField: {
+        padding: 1
     }
 })
 
