@@ -1,9 +1,17 @@
 import React , { useState } from 'react';
-import { View, Text, Button, StyleSheet, SafeAreaView, Image, TouchableOpacity } from 'react-native';
-import { logout } from '../../firebase/firebase';
-import { Ionicons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  TouchableOpacity 
+} from 'react-native';
+
+import colors from '../../config/colors';
+import { Screen } from '../../components';
+import { logout } from '../../firebase/firebase';
 
 function ProfileTabScreen(props) {
     const [image, setImage] = useState();
@@ -28,103 +36,103 @@ function ProfileTabScreen(props) {
     }
 
   return (
-    <SafeAreaView style= {styles.container}>
-        <View style= {{ alignSelf: "center" }}>
-            <View style= {styles.profileImage}>
-                <Image  
-                    source={{uri: image}} 
-                    style={styles.image} 
-                    resizeMode="cover"
-                />
-            </View>
-              <View style={styles.addButton}>
-                <TouchableOpacity onPress={openImagePickerAsync}>
-                    <Ionicons name="ios-add-circle" size={42} color='white' /> 
-                </TouchableOpacity>
-              </View>
-            <View style= {{alignSelf: "center"}}>
-                <Text style = {[styles.text, {top:30}]}>Electric Eagle</Text>
-            </View>
-            <View style= {{alignSelf: "center"}}>
-                <Text style = {[styles.text, {top:30}]}>eEagle@nyc.rr.com</Text>
-            </View>
+    <Screen>
+      <View style= {styles.containerTop}>
+
+        <View style= {styles.profileImage}>
+          <Image  
+            source={{uri: image}} 
+            style={styles.image} 
+            resizeMode="cover"
+          />
         </View>
-            <View style={[styles.row, {alignSelf: "center"}]}>
-                <Icon name="map-marker-radius" color="black" size={22}/>
-                <Text style={[styles.text]}>Ft. Bennings, GA</Text>
-            </View>
 
-            <View style={[styles.buttonContainer, {alignSelf: "center", marginTop: 180}]}>
-                <Icon name="account-settings-outline" color="white" size={20}/>
-                <Text style={[styles.text, {color:"white"}]}>Settings </Text>
-            </View>
+        <TouchableOpacity style={styles.addButton} onPress={openImagePickerAsync}>
+          <MaterialCommunityIcons 
+            name="plus-circle" 
+            size={30} 
+            color={colors.black} 
+          /> 
+        </TouchableOpacity>
 
-            <View style={[styles.buttonContainer, {alignSelf: "center", marginTop: 3}]}>
-                <Button title="Logout" color="white" onPress={handleSignOut}/>
-            </View>
-    </SafeAreaView>
+          
+        <Text style = {[styles.text, {top:30, textAlign: 'center'}]}>Electric Eagle</Text>
+        <Text style = {[styles.text, {top:30, textAlign: 'center'}]}>eEagle@nyc.rr.com</Text>
+      </View>
+
+
+      <View style={styles.location}>
+        <MaterialCommunityIcons
+          name="map-marker-radius" 
+          color="black" 
+          size={22}
+        />
+        <Text style={styles.text}>Ft. Bennings, GA</Text>
+      </View>
+
+      <View style={[styles.buttonContainer, {alignSelf: "center", marginTop: 180}]}>
+        <MaterialCommunityIcons 
+          name="account-settings-outline" 
+          color="white" 
+          size={20}
+        />
+        <Text style={[styles.text, {color:"white"}]}>Settings </Text>
+      </View>
+
+      <TouchableOpacity style={[styles.buttonContainer, {alignSelf: 'center', marginTop: 10}]}>
+        <Text 
+          style={{color: colors.white, fontSize: 20}} 
+          onPress={handleSignOut}
+          >Logout
+        </Text>
+      </TouchableOpacity>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+    containerTop: {
+      alignSelf: 'center',
     },
-
     text: {
-      color: 'black',
+      color: colors.black,
       fontWeight: "400",
-      fontSize: 22
+      fontSize: 20
     },
-
     image: {
       flex: 1,
       width: undefined,
       height: undefined,
     },
-
-    nameText: {
-      fontSize: 50,
-      marginTop: 25,
-      justifyContent: "center"
-
-    },
-
-    row: {
+    location: {
+      alignSelf: 'center',
       flexDirection: 'row',
       marginTop: 100,
     },
-
     profileImage: {
       marginTop: 70,
-      width: 200,
-      height: 200,
+      width: 130,
+      height: 130,
       borderRadius: 100,
-      overflow: "hidden"
+      overflow: "hidden",
+      alignSelf: 'center'
     },
-
     addButton: {
-      backgroundColor: "black",
       position: "absolute",
       bottom: 44,
       right: 7,
-      width: 40,
+      width: 44,
       height: 44,
-      borderRadius: 21,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center"
-    },
-    
+    },   
     buttonContainer: {
-      flex: 1,
       flexDirection: 'row', 
-      backgroundColor: "black",
+      backgroundColor: colors.black,
       width: 200,
       height: 44,
-      borderRadius:20,
+      borderRadius:10,
       alignItems: "center",
       justifyContent: "center"
     }
