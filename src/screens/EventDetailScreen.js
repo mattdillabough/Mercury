@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, View, Alert } from 'react-native';
+import { 
+    Text, 
+    StyleSheet, 
+    View, 
+    Alert 
+} from 'react-native';
 
 import { Screen, AppButton } from '../components';
 import { auth } from '../firebase/firebase';

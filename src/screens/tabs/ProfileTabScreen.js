@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { 
+    View, 
+    Text, 
+    Button, 
+    StyleSheet 
+} from 'react-native';
 
 import { logout } from '../../firebase/firebase';
 import { removeData, removeKey } from '../../utils/cache_handler';

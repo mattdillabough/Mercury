@@ -1,5 +1,9 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { 
+    ScrollView, 
+    StyleSheet, 
+    View 
+} from 'react-native';
 import * as Yup from 'yup';
 
 import { 
@@ -27,10 +31,11 @@ const validationSchema = Yup.object().shape({
         .label("Event Description")
 })
 
-function AddEventScreen(props) {
+function AddEventScreen({ navigation }) {
 
     async function handleSubmit(values) {
         await addEvent(values);
+        navigation.navigate('Schedule');
     }
 
     return (

@@ -1,7 +1,11 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
-import { TextInput, View, StyleSheet, Platform } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { 
+    TextInput, 
+    View, 
+    StyleSheet, 
+    Platform 
+} from 'react-native';
 
 import IconButton from './IconButton';
 import ErrorMessage from './ErrorMessage';

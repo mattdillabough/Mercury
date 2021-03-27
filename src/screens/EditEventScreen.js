@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, View, Text } from 'react-native';
+import { 
+    StyleSheet, 
+    ScrollView, 
+    View, 
+    Text 
+} from 'react-native';
 import * as Yup from 'yup';
 
 import { 
@@ -36,7 +41,6 @@ function EditEventScreen(props) {
 
     async function handleSubmit(values) {
         values["id"] = id;
-        console.log(values);
         await editEvent(values);
         props.navigation.navigate("Event")
     }
