@@ -37,7 +37,6 @@ function ProfileTabScreen(props) {
           console.log(error);
         }
       }
-    }
 
   return (
     <Screen>
