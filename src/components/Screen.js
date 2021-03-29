@@ -3,9 +3,9 @@ import Constants from 'expo-constants';
 import { View, StyleSheet } from 'react-native';
 
 
-function Screen({ children }) {
+function Screen({ children, style }) {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             {children}
         </View>
     );

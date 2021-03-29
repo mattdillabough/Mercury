@@ -9,6 +9,7 @@ import {
 import { Screen, AppButton } from '../components';
 import { auth } from '../firebase/firebase';
 import { deleteEvent } from '../utils/api_handler';
+import colors from '../config/colors';
 
 
 function EventDetailScreen(props) {
@@ -50,23 +51,59 @@ function EventDetailScreen(props) {
     }
 
     return (
-        <Screen>
-            <Text>Event Details</Text>
-            <Text>{event.data.eventTitle}</Text>
+        <Screen style={styles.container}>
+
+            <View style={styles.eventContainer}>
+                <Text style={styles.title}>
+                    {event.data.eventTitle}
+                </Text>
+
+                <Text style={styles.organizer}>
+                    {event.data.eventOrganizer}
+                </Text>
+
+                <Text style={styles.date}>
+                    {event.data.eventDate}
+                </Text>
+
+                <Text style={styles.description}>
+                    {event.data.eventDescription}
+                </Text>
+            </View>
+            
+
+
 
             <View style={styles.buttonContainer}>
                 <View>
                     {
                         isAuthor ? 
-                        <AppButton title="Edit" onPress={() => props.navigation.navigate("Edit Event", {event: event})} /> : 
-                        <AppButton name="Attend" onPress={() => console.log("attending event")} /> 
+                        <AppButton 
+                            style={styles.edit} 
+                            title="Edit" 
+                            onPress={() => props.navigation.navigate("Edit Event", {event: event})} 
+                        /> 
+                        : 
+                        <AppButton 
+                            name="Attend" 
+                            onPress={() => console.log("attending event")} 
+                        /> 
                     }
                 </View>
                 <View>
                     {
                         isAuthor ? 
-                        <AppButton style={styles.delete} title="Delete" onPress={deleteAlert}/> : 
-                        <AppButton style={styles.delete} name="Abstain" onPress={() => console.log("Not attending event")} /> 
+                        <AppButton 
+                            style={styles.delete} 
+                            title="Delete" 
+                            onPress={deleteAlert}
+                        /> 
+                        : 
+                        <AppButton 
+                            style={styles.delete} 
+                            name="Abstain" 
+                            onPress={() => console.log("Not attending event")} 
+                        /> 
                     }
                 </View>       
             </View>         
@@ -75,12 +112,33 @@ function EventDetailScreen(props) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'space-between'
+    },
     buttonContainer: {
         flexDirection: 'row',
-        alignSelf: 'center'
+        alignSelf: 'center',
+    },
+    eventContainer: {
+        marginHorizontal: '5%',
+    },
+    date: {
+        fontSize: 20,
     },
     delete: {
-        backgroundColor: 'tomato'
+        backgroundColor: colors.delete,
+    },
+    description: {
+        fontSize: 16,
+    },
+    edit: {
+        backgroundColor: colors.blue
+    },
+    title : {
+        fontSize: 28,
+    },
+    organizer: {
+        fontSize: 24,
     }
 })
 

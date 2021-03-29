@@ -32,7 +32,7 @@ function ApplicationScreen({ navigation }) {
 
   
   return (
-    <Screen style={styles.container}>
+    <Screen>
       <FlatList
         data={formatData(modules, numColumns)}
         renderItem={({item}) => {
@@ -54,11 +54,6 @@ function ApplicationScreen({ navigation }) {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   item: {
     alignItems: 'center',
     justifyContent: 'center',
