@@ -1,11 +1,15 @@
 import React from 'react';
-import { TextInput, View, StyleSheet, Platform } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { 
+    TextInput, 
+    View, 
+    StyleSheet, 
+    Platform 
+} from 'react-native';
 
-
-function AppTextInput({icon, ...otherProps}) {
+function AppTextInput({icon, style, ...otherProps}) {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             {icon && <MaterialCommunityIcons name={icon} size={20} color={"#6e6969"} style={styles.icon} />}
             <TextInput style={styles.text} {...otherProps} />
         </View>

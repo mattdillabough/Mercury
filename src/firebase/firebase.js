@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 import 'firebase/auth';
 
 import firebaseConfig from './firebaseConfig';
+const axios = require('axios');
 
 // Initialize Firebase App
 
@@ -22,7 +23,11 @@ export const logout = () => auth.signOut();
 export const passwordReset = email => auth.sendPasswordResetEmail(email);
 
 export const verifyEmail = () => {
-  var user = auth.currentUser;
-
+  let user = auth.currentUser;
   user.sendEmailVerification();
+}
+///////////////////////////////////////////////////////////////////////////////////
+export const getToken = async() => {
+  const token = await auth.currentUser.getIdToken(true);
+  return token
 }

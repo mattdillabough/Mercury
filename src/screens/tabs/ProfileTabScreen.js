@@ -12,6 +12,7 @@ import {
 import colors from '../../config/colors';
 import { Screen } from '../../components';
 import { logout } from '../../firebase/firebase';
+import { removeData, removeKey } from '../../utils/cache_handler';
 
 function ProfileTabScreen(props) {
     const [image, setImage] = useState();
@@ -28,12 +29,14 @@ function ProfileTabScreen(props) {
     }
 
     async function handleSignOut() {
-      try {
-        await logout();
-      } catch (error) {
-        console.log(error);
+        try {
+            await removeData('@events');
+            await removeKey();
+            await logout();
+        } catch (error) {
+          console.log(error);
+        }
       }
-    }
 
   return (
     <Screen>
