@@ -5,6 +5,7 @@ export { default as AppTextInput } from './AppTextInput';
 export { default as KeyboardView } from './KeyboardView';
 export { default as IconButton } from './IconButton';
 export { default as EventCard } from './EventCard';
+export { default as SettingCard} from './SettingCard';
 
 // Form components
 export { default as AppForm } from './AppForm';
