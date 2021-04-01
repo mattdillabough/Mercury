@@ -3,9 +3,9 @@ import { Picker } from '@react-native-picker/picker';
 import { Text, View, Alert, StyleSheet, ScrollView } from 'react-native';
 import * as Yup from 'yup';
 
-import { Screen, AppFormField, AppForm, SubmitButton } from '../../components';
 import { auth } from '../../firebase/firebase';
-import { createRole, getAllRoles, assignRole } from '../../utils/api_handler';
+import { createRole, getAllRoles, assignRole } from '../../utils/api_handler/roles';
+import { Screen, AppFormField, AppForm, SubmitButton } from '../../components';
 
 
 const validationSchema = Yup.object().shape({

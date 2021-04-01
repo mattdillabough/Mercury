@@ -8,7 +8,7 @@ import {
 
 import { Screen, AppButton } from '../components';
 import { auth } from '../firebase/firebase';
-import { deleteEvent } from '../utils/api_handler';
+import { deleteEvent } from '../utils/api_handler/events';
 import colors from '../config/colors';
 
 
