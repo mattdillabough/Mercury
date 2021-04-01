@@ -103,3 +103,16 @@ export const editEvent = async(data) => {
     return;
 }
 
+
+export const createRole = async(data) => {
+    const token = await getToken();
+    const url_endpoint = url + '/createRole';
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+
+    axios.post(url_endpoint, {data: data}, {headers: headers})
+    .catch(error => console.error(error.message))
+}

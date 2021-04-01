@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   title: {
-    fontFamily: 'Roboto', 
     fontSize: 28, 
     marginLeft: 10, 
     fontWeight: 'bold'
