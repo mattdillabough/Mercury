@@ -116,3 +116,35 @@ export const createRole = async(data) => {
     axios.post(url_endpoint, {data: data}, {headers: headers})
     .catch(error => console.error(error.message))
 }
+
+
+export const getAllRoles = async() => {
+    const token = await getToken();
+    const url_endpoint = url + '/getAllRoles';
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+
+    let data = axios.get(url_endpoint, {headers: headers})
+    .then(response => response.data)
+    .catch(error => console.error(error.message));
+
+    return data;
+}
+
+
+export const assignRole = async(data) => {
+    const token = await getToken();
+    const url_endpoint = url + '/assignRole';
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+
+    axios.post(url_endpoint, {data: data}, {headers: headers})
+    .catch(error => console.error(error.message))
+
+}

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker'; 
-import { Text, View, Alert, StyleSheet } from 'react-native';
+import { Text, View, Alert, StyleSheet, ScrollView } from 'react-native';
 import * as Yup from 'yup';
 
 import { Screen, AppFormField, AppForm, SubmitButton } from '../../components';
 import { auth } from '../../firebase/firebase';
-import { createRole } from '../../utils/api_handler';
+import { createRole, getAllRoles, assignRole } from '../../utils/api_handler';
 
 
 const validationSchema = Yup.object().shape({
@@ -14,14 +14,25 @@ const validationSchema = Yup.object().shape({
         .label("Role name")
 })
 
+
+const validationSchemaEmail = Yup.object().shape({
+    email: Yup.string()
+        .required()
+        .email()
+        .label("Role name")
+})
+
 function PermissionScreen({ navigation }) {
 
     const [isAuthor, setIsAuthor] = useState(false);
-    const [selected, setSelected] = useState(1);
+    const [selectLevel, setSelectLevel] = useState(1);
+
+    const [role, setRole] = useState("");
+    const [allRoles, setAllRoles] = useState([]);
 
     useEffect(() => {
         checkForAuthor();
-    })
+    },[])
 
     const checkForAuthor = () => {
         auth.currentUser.getIdTokenResult(true)
@@ -29,9 +40,10 @@ function PermissionScreen({ navigation }) {
             if(!!idTokenResult.claims.admin){
                 // permit access to permissions
                 setIsAuthor(true);
+                getRolesForPicker();
             } else {
                 // deny access to permissions
-                showAlert();
+                showDenyAlert();
             }
         })
         .catch((error) => {
@@ -39,8 +51,26 @@ function PermissionScreen({ navigation }) {
         });
     }
 
+    const getRolesForPicker = async() => {
+        let role_data = await getAllRoles().catch(error => console.error(error));
+        setAllRoles(role_data);
+    }
 
-    const showAlert = () => {
+    const createRoleAlert = () => {
+        Alert.alert(
+            "Role created",
+            "",
+            [
+                {
+                    text: "OK",
+                    onPress: () => navigation.navigate("Setting")
+                }
+            ]
+        )
+    }
+
+
+    const showDenyAlert = () => {
         Alert.alert(
             "Permission denied",
             "Access not granted due to current role",
@@ -54,13 +84,19 @@ function PermissionScreen({ navigation }) {
     }
 
     const handleSubmit = (values) => {
-        values["level"] = selected;
+        values["level"] = selectLevel;
         createRole(values);
-        alert("Role created")
+        createRoleAlert();
+    }
+
+    const handleAssign = (values) => {
+        values["role"] = role;
+        assignRole(values);
     }
 
     return (
         <Screen style={styles.container}>
+        <ScrollView>
             <View>
                 <Text style={styles.title}>Create Role</Text>
                 <View style={styles.form}>
@@ -79,9 +115,9 @@ function PermissionScreen({ navigation }) {
 
                     <Text style={styles.subtitle}>Level Access</Text>
                     <Picker
-                        selectedValue={selected}
+                        selectedValue={selectLevel}
                         onValueChange={(itemValue, itemIndex) =>
-                            setSelected(itemValue)
+                            setSelectLevel(itemValue)
                         }>
                         <Picker.Item label="1" value={1} />
                         <Picker.Item label="2" value={2} />
@@ -98,8 +134,43 @@ function PermissionScreen({ navigation }) {
                 </View>          
             </View>
             
-            <Text style={[styles.title, {marginTop: 10}]}>Assign Role</Text>
+            <View>
+                <Text style={[styles.title, {marginTop: 10}]}>Assign Role</Text>
+                <View style={styles.form}>
+                    <AppForm
+                        initialValues={{
+                            email: ''
+                        }}
+                        onSubmit={handleAssign}
+                        validationSchema={validationSchemaEmail}
+                    >
+                        <Text style={styles.subtitle}>Email Address</Text>
+                        <AppFormField
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            keyboardType="email-address"
+                            name="email"
+                            placeholder="Email Address"  
+                            textContentType="emailAddress"
+                        />
+                        <Text style={styles.subtitle}>Roles</Text>
+                        <Picker
+                            selectedValue={role}
+                            onValueChange={(value) => {
+                                setRole(value)
+                            }}>
+                            { allRoles.map((name, index) => <Picker.Item key={index} label={name} value={name} />) }
+                        </Picker>
+
+                        <SubmitButton title="Assign" />
+                    </AppForm>
+                    
+                    
+                </View>
+            </View>
+            
             <View/>
+        </ScrollView>
         </Screen>
     );
 }
