@@ -26,7 +26,7 @@ function ScheduleStack({ navigation }) {
     useEffect(() => {
         auth.currentUser.getIdTokenResult(true)
             .then((idTokenResult) => {
-                if(!!idTokenResult.claims.admin) {
+                if(!!idTokenResult.claims.admin || idTokenResult.claims.accessLevel > 1) {
                     setRole(true);
                 }
             }).catch((error) => {

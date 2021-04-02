@@ -11,7 +11,7 @@ import {
     KeyboardView
 } from '../../components';
 import { registerWithEmail, verifyEmail } from '../../firebase/firebase';
-import { grantDefaultRole } from '../../utils/api_handler';
+import { grantDefaultRole } from '../../utils/api_handler/roles';
 import { storeData } from './helpers';
 import colors from '../../config/colors';
 
