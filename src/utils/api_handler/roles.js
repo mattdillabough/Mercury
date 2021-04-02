@@ -63,7 +63,9 @@ export const grantDefaultRole = async() => {
     }
   
     // Axios is used instead of fetch as it gave me weird results
-    axios.get(url_endpoint, {headers: headers}).then(response => response.data);
+    axios.get(url_endpoint, {headers: headers})
+    .then(response => response.data)
+    .catch(error => console.error(error.message));
     return;
 }
 
