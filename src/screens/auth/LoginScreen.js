@@ -12,7 +12,7 @@ import {
     SubmitButton,
     KeyboardView
 } from '../../components';
-import { storeData, getData } from './helpers';
+import { storeSecureData, getSecureData } from '../../utils/cache_handler';
 import { loginWithEmail } from '../../firebase/firebase';
 
 
@@ -66,16 +66,17 @@ function LoginScreen({ navigation }) {
         }
     };
 
-    handleFaceId = async() => {
+    const handleFaceId = async() => {
         handleAuth();
     }
 
-    handleAuth = async() => {
+    // Handles local auth with Fingerprint/FaceId
+    const handleAuth = async() => {
         let result = await LocalAuthentication.authenticateAsync();
         if(result.success){
 
-            const email = await getData(USER);
-            const password = await getData(KEY);
+            const email = await getSecureData(USER);
+            const password = await getSecureData(KEY);
 
             if(email !== undefined && password !== undefined){
                 handleOnLogin({ email, password });
@@ -88,8 +89,8 @@ function LoginScreen({ navigation }) {
     
         try {
             await loginWithEmail(email, password);
-            await storeData(USER, email);
-            await storeData(KEY, password);
+            await storeSecureData(USER, email);
+            await storeSecureData(KEY, password);
 
         } catch (error) {
           setLoginError(error.message);

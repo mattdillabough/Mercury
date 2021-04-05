@@ -12,7 +12,7 @@ import {
 } from '../../components';
 import { registerWithEmail, verifyEmail } from '../../firebase/firebase';
 import { grantDefaultRole } from '../../utils/api_handler/roles';
-import { storeData } from './helpers';
+import { storeSecureData } from '../../utils/cache_handler';
 import colors from '../../config/colors';
 
 
@@ -43,8 +43,8 @@ function RegisterScreen({ navigation }) {
         const { email, password } = values;
         try {
             await registerWithEmail(email, password);
-            await storeData(USER, email);
-            await storeData(KEY, password);
+            await storeSecureData(USER, email);
+            await storeSecureData(KEY, password);
             verifyEmail();
 
             await grantDefaultRole();

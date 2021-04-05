@@ -17,6 +17,7 @@ import {
   removeData,
   removeKey,
   storeData,
+  getSecureData
 } from "../../utils/cache_handler";
 
 function ProfileTabScreen({ navigation }) {
@@ -28,8 +29,11 @@ function ProfileTabScreen({ navigation }) {
 
   // Display Profile image if in cache
   const fetchImage = async () => {
-    if ((await getData("@profileImage")) !== null) {
-      await getData("@profileImage")
+
+    const email = await getSecureData("USER");
+
+    if ((await getData(email.toString())) !== null) {
+      await getData(email.toString())
         .then((data) => {
           setImage(data);
         })
@@ -45,7 +49,9 @@ function ProfileTabScreen({ navigation }) {
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
     setImage(pickerResult.uri);
-    storeData("@profileImage", pickerResult.uri);
+
+    const email = await getSecureData("USER");
+    storeData(email.toString(), pickerResult.uri);
   };
 
   // Remove event cache data on logout

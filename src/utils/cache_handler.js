@@ -1,5 +1,29 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
+
+
+export const storeSecureData = async(key, value) => {
+    try {
+      await SecureStore.setItemAsync(key, value);
+    } catch (error) {
+      console.log(error, "storeData error from secure store")
+    }  
+  }
+
+
+  export async function getSecureData(key) {
+    try {
+        const value = await SecureStore.getItemAsync(key);
+        return value;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+
+// Async Storage methods
+/////////////////////////////////////////////////////////////////////////////////
 export async function storeData(key, value) {
     try {
         await AsyncStorage.setItem(key, value.toString());
