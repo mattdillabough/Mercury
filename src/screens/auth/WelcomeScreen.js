@@ -5,7 +5,7 @@ import { Screen, AppButton } from '../../components';
 
 function WelcomeScreen({ navigation }) {
     return (
-        <Screen style={styles.containers}>
+        <Screen>
             <View style={styles.container}>
                 <View style={styles.title}>
                     <Text style={styles.text}>Welcome Screen</Text>

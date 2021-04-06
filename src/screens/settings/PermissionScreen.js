@@ -5,7 +5,12 @@ import * as Yup from 'yup';
 
 import { auth } from '../../firebase/firebase';
 import { createRole, getAllRoles, assignRole } from '../../utils/api_handler/roles';
-import { Screen, AppFormField, AppForm, SubmitButton } from '../../components';
+import { 
+    Screen, 
+    AppFormField, 
+    AppForm, 
+    SubmitButton 
+} from '../../components';
 
 
 const validationSchema = Yup.object().shape({
@@ -34,10 +39,12 @@ function PermissionScreen({ navigation }) {
         checkForAuthor();
     },[])
 
+    // Assure that only admins can access this setting page
     const checkForAuthor = () => {
         auth.currentUser.getIdTokenResult(true)
         .then((idTokenResult) => {
             if(!!idTokenResult.claims.admin){
+
                 // permit access to permissions
                 setIsAuthor(true);
                 getRolesForPicker();
@@ -51,6 +58,7 @@ function PermissionScreen({ navigation }) {
         });
     }
 
+    // Retrieve all roles from DB to load into picker
     const getRolesForPicker = async() => {
         let role_data = await getAllRoles().catch(error => console.error(error));
         setAllRoles(role_data);
@@ -116,7 +124,7 @@ function PermissionScreen({ navigation }) {
                     <Text style={styles.subtitle}>Level Access</Text>
                     <Picker
                         selectedValue={selectLevel}
-                        onValueChange={(itemValue, itemIndex) =>
+                        onValueChange={(itemValue) =>
                             setSelectLevel(itemValue)
                         }>
                         <Picker.Item label="1" value={1} />
@@ -177,7 +185,6 @@ function PermissionScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        //justifyContent: 'space-between',
         paddingTop: 15,
     },
     form: {
