@@ -6,10 +6,10 @@ import {
     Alert 
 } from 'react-native';
 
-import { Screen, AppButton } from '../components';
-import { auth } from '../firebase/firebase';
-import { deleteEvent } from '../utils/api_handler/events';
-import colors from '../config/colors';
+import { Screen, AppButton } from '../../../components';
+import { auth } from '../../../firebase/firebase';
+import { deleteEvent } from '../../../utils/api_handler/events';
+import colors from '../../../config/colors';
 
 
 function EventDetailScreen(props) {

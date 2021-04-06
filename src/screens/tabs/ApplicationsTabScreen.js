@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import ApplicationScreen from '../ApplicationScreen';
-import ScheduleStack from '../ScheduleStack';
+import ScheduleStack from '../modules/schedule/ScheduleStack';
 
 const Stack = createStackNavigator();
 
