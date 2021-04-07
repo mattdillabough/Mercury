@@ -11,7 +11,9 @@ import {
 
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
+import { auth } from "../../firebase/firebase";
 import { logout } from "../../firebase/firebase";
+
 import {
   getData,
   removeData,
@@ -19,7 +21,9 @@ import {
   storeData,
 } from "../../utils/cache_handler";
 
+
 function ProfileTabScreen({ navigation }) {
+  
   const [image, setImage] = useState();
 
   useEffect(() => {
@@ -75,9 +79,8 @@ function ProfileTabScreen({ navigation }) {
           name="add-circle"
           onPress={openImagePickerAsync}
         />
-
-        <Text style={[styles.text]}>Electric Eagle</Text>
-        <Text>eEagle@nyc.rr.com</Text>
+        <Text style={[styles.text, {marginTop: 15, fontSize: 25}]}>M E R C U R Y</Text>
+        <Text style={[styles.text]}>{auth.currentUser.email}</Text>
       </View>
 
       <View style={styles.locationContainer}>
@@ -154,7 +157,6 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 100,
     overflow: "hidden",
-
     borderColor: "black",
     borderWidth: 2,
   },
@@ -162,6 +164,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: "400",
     fontSize: 20,
+    alignSelf: "center"
   },
 });
 
