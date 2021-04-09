@@ -123,22 +123,28 @@ const styles = StyleSheet.create({
         marginHorizontal: '5%',
     },
     date: {
-        fontSize: 20,
+        fontSize: 15,
+        paddingTop: 5,
     },
     delete: {
         backgroundColor: colors.delete,
     },
     description: {
         fontSize: 16,
+        paddingTop: 20
     },
     edit: {
         backgroundColor: colors.blue
     },
     title : {
-        fontSize: 28,
+        fontSize: 34,
+        fontWeight: 'bold',
+        textTransform: 'capitalize',
     },
     organizer: {
-        fontSize: 24,
+        fontSize: 19,
+        fontStyle: 'italic',
+        textTransform: 'capitalize'
     }
 })
 
