@@ -19,15 +19,20 @@ const styles = StyleSheet.create({
     container: {
         margin: 15,
         borderWidth: 0.5,
+        borderRadius: 5,
     },
     date: {
-        fontSize: 16
+        fontSize: 15,
     },
     organizer: {
-        fontSize: 18
+        fontSize: 16,
+        fontStyle: 'italic',
+        textTransform: 'capitalize',
     },
     title: {
-        fontSize: 22
+        fontSize: 24,
+        fontWeight: 'bold',
+        textTransform: 'capitalize',
     }
 })
 
