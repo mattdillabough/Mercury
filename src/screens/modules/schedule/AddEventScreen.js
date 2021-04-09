@@ -63,7 +63,7 @@ function AddEventScreen({ navigation }) {
                         />
                         <AppFormField
                             name="eventDate"
-                            placeholder="Event Date (replace with DatePicker)"
+                            placeholder="Event Date"
                         />
                         <AppFormBox
                             name="eventDescription"

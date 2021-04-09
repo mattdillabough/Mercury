@@ -11,7 +11,7 @@ import { Screen } from '../components';
 
 const modules = [
   {id: 1, value: 'Schedule'},
-  {id: 2, value: 'module2' },
+  {id: 2, value: 'Medical' },
   {id: 3, value: 'module3' }
 ];
 const numColumns = 2;

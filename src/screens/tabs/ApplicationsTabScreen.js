@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import ApplicationScreen from '../ApplicationScreen';
 import ScheduleStack from '../modules/schedule/ScheduleStack';
+import MedicalScreen from '../modules/medical/MedicalScreen';
 
 const Stack = createStackNavigator();
 
@@ -11,7 +12,8 @@ function ApplicationsTabScreen(props) {
     return (
         <Stack.Navigator headerMode="none" initialRouteName="Applications">
             <Stack.Screen name="Applications"   component={ApplicationScreen} />
-            <Stack.Screen name="Schedule"       component={ScheduleStack}  />
+            <Stack.Screen name="Schedule"       component={ScheduleStack}     />
+            <Stack.Screen name="Medical"        component={MedicalScreen}     />
         </Stack.Navigator>
     );
 }
