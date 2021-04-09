@@ -79,11 +79,11 @@ function ProfileTabScreen({ navigation }) {
           name="add-circle"
           onPress={openImagePickerAsync}
         />
-        <Text style={[styles.text, {marginTop: 15, fontSize: 25}]}>M E R C U R Y</Text>
-        <Text style={[styles.text]}>{auth.currentUser.email}</Text>
+        <Text style={[styles.text, {marginTop: 20, fontSize: 25, fontWeight:"bold"}]}>M E R C U R Y</Text>
+        <Text style={[styles.text, {marginTop: 3}]}>{auth.currentUser.email}</Text>
       </View>
 
-      <View style={styles.locationContainer}>
+      <View style={[styles.locationContainer, , {marginBottom: 200}]}>
         <MaterialCommunityIcons
           name="map-marker-radius"
           color="black"
@@ -118,10 +118,7 @@ function ProfileTabScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   addButton: {
-    //position: "absolute",
     position: "relative",
-    //bottom: 45,
-    //right: 0,
     left: 100,
     bottom: 25,
   },
@@ -140,7 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   container: {
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   image: {
@@ -151,6 +148,7 @@ const styles = StyleSheet.create({
   locationContainer: {
     flexDirection: "row",
   },
+
   profileImage: {
     marginTop: 30,
     width: 130,
