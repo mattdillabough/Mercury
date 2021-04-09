@@ -48,10 +48,15 @@ function ProfileTabScreen({ navigation }) {
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    setImage(pickerResult.uri);
 
-    const email = await getSecureData("USER");
-    storeData(email.toString(), pickerResult.uri);
+    if (pickerResult.cancelled !== true){
+      setImage(pickerResult.uri);
+
+      const email = await getSecureData("USER");
+      storeData(email.toString(), pickerResult.uri);
+      return;
+    }
+    return;
   };
 
   // Remove event cache data on logout
