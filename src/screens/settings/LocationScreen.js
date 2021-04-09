@@ -12,7 +12,7 @@ function LocationScreen({ navigation }) {
     return (
     <Screen style={styles.container}>
       <View>
-        <Text style={[styles.title, {marginTop: 20}]}> userName</Text>
+        <Text style={[styles.title, {marginTop: 30}]}> {auth.currentUser.email}</Text>
         <View style={styles.form}>
             <AppForm
                 initialValues={{
