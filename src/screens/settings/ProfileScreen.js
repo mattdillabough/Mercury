@@ -88,19 +88,19 @@ function ProfileTabScreen({ navigation }) {
         />
 
         <Text style={[styles.text]}>Electric Eagle</Text>
-        <Text>eEagle@nyc.rr.com</Text>
+        <Text style={{textAlign: 'center'}}>eEagle@nyc.rr.com</Text>
+        <View style={styles.locationContainer}>
+          <MaterialCommunityIcons
+            name="map-marker-radius"
+            color="black"
+            size={22}
+          />
+          <Text style={{textAlign: 'center', fontWeight: 'bold'}}>FT. Bennings, GA</Text>
+        </View>
       </View>
 
-      <View style={styles.locationContainer}>
-        <MaterialCommunityIcons
-          name="map-marker-radius"
-          color="black"
-          size={22}
-        />
-        <Text style={styles.text}>Ft. Bennings, GA</Text>
-      </View>
 
-      <View>
+      <View style={{paddingBottom: 15}}>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("Setting")}
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     flexDirection: "row",
+    marginTop: 5
   },
   profileImage: {
     marginTop: 30,
@@ -173,6 +174,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: "400",
     fontSize: 20,
+    textAlign: 'center'
   },
 });
 
