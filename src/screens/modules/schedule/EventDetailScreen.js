@@ -85,7 +85,7 @@ function EventDetailScreen(props) {
                         /> 
                         : 
                         <AppButton 
-                            name="Attend" 
+                            title="Attend" 
                             onPress={() => console.log("attending event")} 
                         /> 
                     }
@@ -101,7 +101,7 @@ function EventDetailScreen(props) {
                         : 
                         <AppButton 
                             style={styles.delete} 
-                            name="Abstain" 
+                            title="Absence" 
                             onPress={() => console.log("Not attending event")} 
                         /> 
                     }
