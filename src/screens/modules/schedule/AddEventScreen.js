@@ -13,8 +13,8 @@ import {
     AppFormBox,
     KeyboardView,
     SubmitButton
-} from '../components';
-import { addEvent } from '../utils/api_handler/events';
+} from '../../../components';
+import { addEvent } from '../../../utils/api_handler/events';
 
 const validationSchema = Yup.object().shape({
     eventTitle: Yup.string()
@@ -63,7 +63,7 @@ function AddEventScreen({ navigation }) {
                         />
                         <AppFormField
                             name="eventDate"
-                            placeholder="Event Date (replace with DatePicker)"
+                            placeholder="Event Date"
                         />
                         <AppFormBox
                             name="eventDescription"

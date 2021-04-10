@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Alert, TouchableOpacity, Text } from 'react-native';
 import * as Yup from 'yup';
 import { Ionicons } from '@expo/vector-icons';
 
 import { 
-    Screen, 
-    KeyboardView, 
+    Screen,
     AppForm,
     AppFormField,
     SubmitButton,
-    ErrorMessage
+    ErrorMessage,
 } from '../../components';
 import { passwordReset } from '../../firebase/firebase';
 import colors from '../../config/colors';
@@ -46,8 +45,12 @@ function RecoverScreen({ navigation }) {
 
 
     return (
-        <Screen>
-            <KeyboardView style={styles.container}>
+        <Screen style={styles.container}>
+            <View/>
+            <View>
+                <Text style={styles.title}>Reset Password</Text>
+            </View>
+            <View>
                 <AppForm
                     initialValues={{
                         email: ''
@@ -69,9 +72,9 @@ function RecoverScreen({ navigation }) {
                         <ErrorMessage error={submitError} visible={true} />
                     </View>
 
-                </AppForm>
-                
-            </KeyboardView>
+                </AppForm>           
+            </View>
+            <View/>
             <TouchableOpacity style={styles.backButton} onPress={ () => navigation.navigate("Login") }>
                 <Ionicons name="arrow-back-circle-sharp" size={40} color={colors.defaultButton} />
             </TouchableOpacity>
@@ -82,15 +85,15 @@ function RecoverScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
     },
     input_container: {
         paddingHorizontal: '5%',
     },
     title: {
-        alignSelf: 'center',
-        position: 'absolute',
-        top: 60,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 26
     },
     backButton: {
         alignSelf: "flex-start",

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View} from 'react-native';
 
-import { IconButton } from '../components';
-import { auth } from '../firebase/firebase';
+import { IconButton } from '../../../components';
+import { auth } from '../../../firebase/firebase';
 import ScheduleScreen from './ScheduleScreen';
 import AddEventScreen from './AddEventScreen';
 import EditEventScreen from './EditEventScreen';

@@ -13,7 +13,7 @@ export const assignRole = async(data) => {
     }
 
     axios.post(url_endpoint, {data: data}, {headers: headers})
-    .catch(error => console.error(error.message))
+        .catch(error => console.error(error.message))
 
 }
 
@@ -28,7 +28,7 @@ export const createRole = async(data) => {
     }
 
     axios.post(url_endpoint, {data: data}, {headers: headers})
-    .catch(error => console.error(error.message))
+        .catch(error => console.error(error.message))
 }
 
 
@@ -42,8 +42,8 @@ export const getAllRoles = async() => {
     }
 
     let data = axios.get(url_endpoint, {headers: headers})
-    .then(response => response.data)
-    .catch(error => console.error(error.message));
+        .then(response => response.data)
+        .catch(error => console.error(error.message));
 
     return data;
 }
@@ -64,9 +64,22 @@ export const grantDefaultRole = async() => {
   
     // Axios is used instead of fetch as it gave me weird results
     axios.get(url_endpoint, {headers: headers})
-    .then(response => response.data)
-    .catch(error => console.error(error.message));
+        .then(response => response.data)
+        .catch(error => console.error(error.message));
     return;
 }
 
-
+export const revokeRole = async (data) => {
+    const token = await getToken();
+    const url_endpoint = url + "/revokeRole";
+  
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: token,
+    };
+  
+    axios
+      .post(url_endpoint, { data: data }, { headers: headers })
+      .then(response => console.log(response.data))
+      .catch((error) => console.error(error.message));
+  };

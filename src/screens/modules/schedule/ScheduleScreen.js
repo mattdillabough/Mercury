@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 
-import { Screen, EventCard } from '../components';
-import { getRecentEvents, getNextRecentEvents } from '../utils/api_handler/events';
-import { storeJsonData, getJsonData } from '../utils/cache_handler';
+import { Screen, EventCard } from '../../../components';
+import { getRecentEvents, getNextRecentEvents } from '../../../utils/api_handler/events';
+import { storeJsonData, getJsonData } from '../../../utils/cache_handler';
 
 // Flatlist of upcoming events
 // When event clicked, navigate to EventDetailScreen

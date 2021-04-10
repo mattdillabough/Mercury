@@ -19,6 +19,7 @@ import {
   removeData,
   removeKey,
   storeData,
+  getSecureData
 } from "../../utils/cache_handler";
 
 
@@ -32,8 +33,11 @@ function ProfileTabScreen({ navigation }) {
 
   // Display Profile image if in cache
   const fetchImage = async () => {
-    if ((await getData("@profileImage")) !== null) {
-      await getData("@profileImage")
+
+    const email = await getSecureData("USER");
+
+    if ((await getData(email.toString())) !== null) {
+      await getData(email.toString())
         .then((data) => {
           setImage(data);
         })
@@ -48,8 +52,15 @@ function ProfileTabScreen({ navigation }) {
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    setImage(pickerResult.uri);
-    storeData("@profileImage", pickerResult.uri);
+
+    if (pickerResult.cancelled !== true){
+      setImage(pickerResult.uri);
+
+      const email = await getSecureData("USER");
+      storeData(email.toString(), pickerResult.uri);
+      return;
+    }
+    return;
   };
 
   // Remove event cache data on logout
@@ -79,20 +90,21 @@ function ProfileTabScreen({ navigation }) {
           name="add-circle"
           onPress={openImagePickerAsync}
         />
-        <Text style={[styles.text, {marginTop: 20, fontSize: 25, fontWeight:"bold"}]}>M E R C U R Y</Text>
-        <Text style={[styles.text, {marginTop: 3}]}>{auth.currentUser.email}</Text>
+
+
+        <Text style={[styles.text]}>Electric Eagle</Text>
+        <Text style={{textAlign: 'center'}}>eEagle@nyc.rr.com</Text>
+        <View style={styles.locationContainer}>
+          <MaterialCommunityIcons
+            name="map-marker-radius"
+            color="black"
+            size={22}
+          />
+          <Text style={{textAlign: 'center', fontWeight: 'bold'}}>FT. Bennings, GA</Text>
+        </View>
       </View>
 
-      <View style={[styles.locationContainer, , {marginBottom: 200}]}>
-        <MaterialCommunityIcons
-          name="map-marker-radius"
-          color="black"
-          size={22}
-        />
-        <Text style={styles.text}>Ft. Bennings, GA</Text>
-      </View>
-
-      <View>
+      <View style={{paddingBottom: 15}}>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("Setting")}
@@ -147,6 +159,7 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     flexDirection: "row",
+    marginTop: 5
   },
 
   profileImage: {
@@ -162,7 +175,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: "400",
     fontSize: 20,
-    alignSelf: "center"
+    textAlign: 'center'
   },
 });
 

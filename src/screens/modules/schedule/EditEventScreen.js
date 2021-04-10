@@ -15,8 +15,8 @@ import {
     KeyboardView,
     SubmitButton,
     IconButton
-} from '../components';
-import { editEvent } from '../utils/api_handler/events';
+} from '../../../components';
+import { editEvent } from '../../../utils/api_handler/events';
 
 const validationSchema = Yup.object().shape({
     eventTitle: Yup.string(),
