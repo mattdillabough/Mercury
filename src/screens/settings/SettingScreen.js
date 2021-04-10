@@ -4,7 +4,9 @@ import { Text, FlatList, StyleSheet } from "react-native";
 import { Screen, SettingCard } from "../../components";
 
 const data = [
-  {id: 1, value: "Permissions"}
+  {id: 1, value: "Permissions"},
+  {id: 2, value: "Change Password"},
+  {id: 3, value: "Change Location"}
 ]
 
 function SettingScreen({ navigation }) {

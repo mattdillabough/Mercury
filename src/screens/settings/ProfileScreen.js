@@ -11,7 +11,9 @@ import {
 
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
+import { auth } from "../../firebase/firebase";
 import { logout } from "../../firebase/firebase";
+
 import {
   getData,
   removeData,
@@ -20,7 +22,9 @@ import {
   getSecureData
 } from "../../utils/cache_handler";
 
+
 function ProfileTabScreen({ navigation }) {
+  
   const [image, setImage] = useState();
 
   useEffect(() => {
@@ -87,6 +91,7 @@ function ProfileTabScreen({ navigation }) {
           onPress={openImagePickerAsync}
         />
 
+
         <Text style={[styles.text]}>Electric Eagle</Text>
         <Text style={{textAlign: 'center'}}>eEagle@nyc.rr.com</Text>
         <View style={styles.locationContainer}>
@@ -98,7 +103,6 @@ function ProfileTabScreen({ navigation }) {
           <Text style={{textAlign: 'center', fontWeight: 'bold'}}>FT. Bennings, GA</Text>
         </View>
       </View>
-
 
       <View style={{paddingBottom: 15}}>
         <TouchableOpacity
@@ -126,10 +130,7 @@ function ProfileTabScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   addButton: {
-    //position: "absolute",
     position: "relative",
-    //bottom: 45,
-    //right: 0,
     left: 100,
     bottom: 25,
   },
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   container: {
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   image: {
@@ -160,13 +161,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 5
   },
+
   profileImage: {
     marginTop: 30,
     width: 130,
     height: 130,
     borderRadius: 100,
     overflow: "hidden",
-
     borderColor: "black",
     borderWidth: 2,
   },
