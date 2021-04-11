@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { 
     Text, 
     StyleSheet, 
     View, 
-    Alert 
+    Alert, 
+    TouchableOpacity
 } from 'react-native';
 
 import { Screen, AppButton } from '../../../components';
@@ -20,6 +21,18 @@ function EventDetailScreen(props) {
     useEffect(() => {
         checkForAuthor();
     }, [])
+
+    useLayoutEffect(() => {
+        props.navigation.setOptions({
+            headerRight: () => {
+                return(
+                    <TouchableOpacity style={{marginRight: 15}} onPress={() => props.navigation.navigate('Event Invite', {eventId: event.id})}>
+                        <Text style={{fontSize: 18, color: colors.blue}}>Invite</Text>
+                    </TouchableOpacity>
+                )
+            }
+        })
+    })
 
     // If current event document author is the signed in user, edit & delete buttons are shown
     const checkForAuthor = () => {

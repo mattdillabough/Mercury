@@ -69,13 +69,28 @@ export const grantDefaultRole = async() => {
     return;
 }
 
+
+export const inviteRoleGroup = async(data) => {
+    const token = await getToken();
+    const url_endpoint = url + "/inviteRole";
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+
+    axios
+        .post(url_endpoint, {data: data} ,{headers: headers})
+        .catch((error) => console.error(error.message));
+}
+
 export const revokeRole = async (data) => {
     const token = await getToken();
     const url_endpoint = url + "/revokeRole";
   
     const headers = {
-      "Content-Type": "application/json",
-      Authorization: token,
+        "Content-Type": "application/json",
+        "Authorization": token,
     };
   
     axios

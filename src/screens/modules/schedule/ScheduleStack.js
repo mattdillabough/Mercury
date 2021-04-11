@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View} from 'react-native';
+import { Text, TouchableOpacity, View} from 'react-native';
 
 import { IconButton } from '../../../components';
 import { auth } from '../../../firebase/firebase';
+import colors from '../../../config/colors';
 import ScheduleScreen from './ScheduleScreen';
 import AddEventScreen from './AddEventScreen';
 import EditEventScreen from './EditEventScreen';
 import EventDetailScreen from './EventDetailScreen';
+import EventInviteScreen from './EventInviteScreen';
 
 
 /*
@@ -35,7 +37,7 @@ function ScheduleStack({ navigation }) {
     })
 
     return (
-        <Stack.Navigator headerMode="screen" initialRouteName="Schedule">
+        <Stack.Navigator headerMode="screen">
             <Stack.Screen   name="Schedule" component={ScheduleScreen} options={{
                 title: "Upcoming Events",
                 headerRight: (props) => {
@@ -48,7 +50,8 @@ function ScheduleStack({ navigation }) {
             }} />
             <Stack.Screen   name="Add Event"    component={AddEventScreen} />
             <Stack.Screen   name="Edit Event"   component={EditEventScreen}/>
-            <Stack.Screen   name="Event"        component={EventDetailScreen} />
+            <Stack.Screen   name="Event"        component={EventDetailScreen}/>     
+            <Stack.Screen   name="Event Invite" component={EventInviteScreen} />      
         </Stack.Navigator>
     );
 }

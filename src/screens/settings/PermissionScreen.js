@@ -129,7 +129,7 @@ function PermissionScreen({ navigation }) {
         </View>
 
         <View>
-          {/* Start of Unassign Role container */}
+          {/* Start of Assign Role container */}
           <Text style={[styles.title, { marginTop: 10 }]}>Assign Role</Text>
           <View style={styles.form}>
             <AppForm
@@ -164,8 +164,9 @@ function PermissionScreen({ navigation }) {
             </AppForm>
           </View>
         </View>
-        {/* End of Unassign Role container */}
+        {/* End of Assign Role container */}
 
+        {/* Start of Revoke Role container */}
         <View>
           <Text style={[styles.title, { marginTop: 10 }]}>
             Remove Role from User
@@ -203,6 +204,8 @@ function PermissionScreen({ navigation }) {
             </AppForm>
           </View>
         </View>
+        {/* End of Revoke Role container */}
+        
       </ScrollView>
     </Screen>
   );

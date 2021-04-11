@@ -20,6 +20,7 @@ function Routes(props) {
               Applications: {
                 screens: {
                   Schedule: "schedule",
+                  Invite: "invite/:eventId",
                   Medical: "medical"
                 }
               },
