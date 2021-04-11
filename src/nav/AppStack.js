@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 
 function AppStack(props) {
     return (
-        <Tab.Navigator initialRouteName="Applications" headerMode="none" screenOptions={({ route }) => ({
+        <Tab.Navigator headerMode="none" screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
 

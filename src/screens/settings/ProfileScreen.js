@@ -11,7 +11,6 @@ import {
 
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
-import { auth } from "../../firebase/firebase";
 import { logout } from "../../firebase/firebase";
 
 import {
@@ -149,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   container: {
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   image: {
