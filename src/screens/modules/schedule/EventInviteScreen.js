@@ -20,7 +20,13 @@ function EventInviteScreen(props) {
     };
 
     async function onInviteGroup(){
-        inviteRoleGroup(inviteRole);
+
+        // Pass unit/role to invite and the event id 
+        let data = {
+            role: inviteRole,
+            event_id: props.route.params.eventId
+        }
+        inviteRoleGroup(data);
     }
 
 
