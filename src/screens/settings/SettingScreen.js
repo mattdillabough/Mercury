@@ -5,7 +5,7 @@ import { Screen, SettingCard } from "../../components";
 
 const data = [
   {id: 1, value: "Permissions"},
-  {id: 2, value: "Change Password"},
+  {id: 2, value: "Change Phone Number"},
   {id: 3, value: "Change Location"}
 ]
 

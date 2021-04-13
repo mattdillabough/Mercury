@@ -7,40 +7,28 @@ import {
 import { Screen, IconButton, AppFormField, AppForm, SubmitButton } from "../../components";
 import { auth } from '../../firebase/firebase';
 
-function PasswordScreen({ navigation }) {
+function PhoneNumberScreen({ navigation }) {
 
     return (
     <Screen style={styles.container}>
       <View>
-        <Text style={[styles.title, {marginTop: 30}]}> {auth.currentUser.email}</Text>
+        <Text style={[styles.title, {marginTop: 38}]}> {auth.currentUser.email}</Text>
         <View style={styles.form}>
             <AppForm
                 initialValues={{
                     email: ''
                 }}
             >
-                <Text style={styles.subtitle}> Current Password</Text>
+                <Text style={styles.subtitle}> New Phone Number</Text>
                 <AppFormField
                     autoCapitalize="none"
                     autoCorrect={false}
-                    icon="lock" 
+                    // icon="lock" 
                     keyboardType="default"
-                    name="password"
-                    placeholder="Current Password"  
+                    name="newTelephoneNumber"
+                    placeholder="New Phone Number"
                     secureTextEntry={true}  
-                    textContentType="password"
-                />
-
-                <Text style={styles.subtitle}> New Password</Text>
-                <AppFormField
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    icon="lock" 
-                    keyboardType="default"
-                    name="newPassword"
-                    placeholder="New Password"
-                    secureTextEntry={true}  
-                    textContentType="newPassword"
+                    textContentType="telephoneNumber"
                 />
             </AppForm>
         </View>
@@ -59,7 +47,7 @@ const styles = StyleSheet.create({
         paddingTop: 50,
     },
     title: {
-        fontSize: 30,
+        fontSize: 28,
         alignSelf: 'center',
         fontWeight: 'bold',
     },
@@ -68,4 +56,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PasswordScreen; 
+export default PhoneNumberScreen; 

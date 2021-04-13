@@ -12,7 +12,7 @@ function LocationScreen({ navigation }) {
     return (
     <Screen style={styles.container}>
       <View>
-        <Text style={[styles.title, {marginTop: 30}]}> {auth.currentUser.email}</Text>
+        <Text style={[styles.title, {marginTop: 38}]}> {auth.currentUser.email}</Text>
         <View style={styles.form}>
             <AppForm
                 initialValues={{
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         paddingTop: 50,
     },
     title: {
-        fontSize: 30,
+        fontSize: 28,
         alignSelf: 'center',
         fontWeight: 'bold',
     },
