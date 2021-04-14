@@ -118,8 +118,8 @@ function ProfileTabScreen({ navigation }) {
           onPress={openImagePickerAsync}
         />
         
-        <Text style={[styles.text]}>Electric Eagle</Text>
-        <Text style={{textAlign: 'center'}}>eEagle@nyc.rr.com</Text>
+        <Text style={[styles.text]}>M E R C U R Y</Text>
+        <Text style={{textAlign: 'center'}}>{auth.currentUser.email}</Text>
         <View style={styles.locationContainer}>
           <MaterialCommunityIcons
             name="map-marker-radius"
