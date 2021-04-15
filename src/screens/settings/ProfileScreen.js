@@ -19,11 +19,8 @@ import {
   removeData,
   removeKey,
   storeData,
-  getSecureData,
-  storeJsonData, 
-  getJsonData
+  getSecureData
 } from "../../utils/cache_handler";
-import { addImage, getProfileImg } from '../../utils/api_handler/profileImg';
 
 
 function ProfileTabScreen({ navigation }) {
@@ -33,6 +30,24 @@ function ProfileTabScreen({ navigation }) {
   useEffect(() => {
     fetchImage();
   });
+  
+  // Display profileImage from cache if it is available
+  // Fetch profileImage from firestore db if it isn't in cache
+  // Display default avatar if it is not in the firestore.
+
+  // Display Profile image if in cache
+  const fetchImage = async () => {
+
+    const email = await getSecureData("USER");
+
+    if ((await getData(email.toString())) !== null) {
+      await getData(email.toString())
+        .then((data) => {
+          setImage(data);
+        })
+        .catch((error) => console.error(error.message));
+    }
+  };
 
   let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -51,44 +66,6 @@ function ProfileTabScreen({ navigation }) {
     }
     return;
   };
-
-    // Display profileImage from cache if it is available
-    // Fetch profileImage from firestore db if it isn't in cache
-    // Display default avatar if it is not in the firestore.
-
-    const fetchImage = async() => {
-
-      const email = await getSecureData("USER");
-
-        if ((await getData(email.toString())) !== null) {
-          await getData(email.toString())
-            .then((data) => {
-              setImage(data);
-            })
-            .catch((error) => console.error(error.message));
-        }
-        else {
-            await getFirebaseImg();
-        }
-    };
-
-      const getFirebaseImg = async() => {
-
-        if (await getJsonData('@profileImg') !== null){
-          await getJsonData('@profileImg')
-            .then(data => {
-              setImage(data);
-            })
-            .catch((error) => console.error(error.message))
-        }
-          
-          await getProfileImg().then(data => {
-              setImage(data);
-              setRefresh(false);
-              storeJsonData('@profileImg', data);
-          })
-          .catch(() => setRefresh(false))
-      }
 
   // Remove event cache data on logout
   async function handleSignOut() {
