@@ -23,11 +23,10 @@ function PhoneNumberScreen({ navigation }) {
                 <AppFormField
                     autoCapitalize="none"
                     autoCorrect={false}
-                    // icon="lock" 
-                    keyboardType="default"
-                    name="newTelephoneNumber"
+                    icon="phone"
+                    keyboardType="numeric"
+                    name="telephone"
                     placeholder="New Phone Number"
-                    secureTextEntry={true}  
                     textContentType="telephoneNumber"
                 />
             </AppForm>

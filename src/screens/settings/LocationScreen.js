@@ -19,19 +19,12 @@ function LocationScreen({ navigation }) {
                     email: ''
                 }}
             >
-                <Text style={styles.subtitle}> Current Location</Text>
-                <AppFormField
-                    autoCapitalize="none"
-                    autoCorrect={true}
-                    keyboardType="default"
-                    name="location"
-                    placeholder="Current Location"
-                />
 
                 <Text style={styles.subtitle}> New Location</Text>
                 <AppFormField
                     autoCapitalize="none"
                     autoCorrect={false}
+                    icon="map-marker-radius"
                     keyboardType="default"
                     name="newLocation"
                     placeholder="New Location"
