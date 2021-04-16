@@ -11,6 +11,7 @@ export { default as SettingCard} from './SettingCard';
 export { default as AppForm } from './AppForm';
 export { default as AppFormField } from './AppFormField';
 export { default as AppFormBox } from './AppFormBox';
+export { default as AppFormChoice } from './AppFormChoice';
 export { default as ErrorMessage } from './ErrorMessage';
 export { default as SubmitButton } from './SubmitButton';
 export { default as EditFormField } from './EditFormField';
