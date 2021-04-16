@@ -1,5 +1,5 @@
 import React,{ useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import { Screen, AppButton } from '../../../components';
 import { getEventById } from '../../../utils/api_handler/events';
@@ -8,6 +8,7 @@ import colors from '../../../config/colors';
 function InvitedScreen(props) {
 
     const [event, setEvent] = useState({});
+    const [date, setDate] = useState("");
     const [loading, setLoading] = useState(true);
     const event_id = props.route.params.eventId;
 
@@ -19,6 +20,9 @@ function InvitedScreen(props) {
     const getInviteEvent = async() => {
         let data = await getEventById(event_id).catch(error => console.error(error.message));
         setEvent(data);
+
+        let date = new Date(data.data.eventDate).toLocaleDateString();
+        setDate(date);
         setLoading(false);
     };
 
@@ -42,7 +46,7 @@ function InvitedScreen(props) {
                 </Text>
 
                 <Text style={styles.date}>
-                    {event.data.eventDate}
+                    {date}
                 </Text>
 
                 <Text style={styles.description}>

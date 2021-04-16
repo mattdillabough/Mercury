@@ -17,6 +17,7 @@ function EventDetailScreen(props) {
 
     const [isAuthor, setIsAuthor] = useState(false);
     const event = props.route.params.article;
+    let date = new Date(event.data.eventDate).toLocaleDateString();
 
     useEffect(() => {
         checkForAuthor();
@@ -76,7 +77,7 @@ function EventDetailScreen(props) {
                 </Text>
 
                 <Text style={styles.date}>
-                    {event.data.eventDate}
+                    {date}
                 </Text>
 
                 <Text style={styles.description}>

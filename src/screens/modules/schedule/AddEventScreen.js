@@ -11,6 +11,7 @@ import {
     AppForm,
     AppFormField,
     AppFormBox,
+    AppFormDatePicker,
     KeyboardView,
     SubmitButton
 } from '../../../components';
@@ -61,9 +62,9 @@ function AddEventScreen({ navigation }) {
                             name="eventOrganizer"
                             placeholder="Event Organizer"
                         />
-                        <AppFormField
+                        <AppFormDatePicker
                             name="eventDate"
-                            placeholder="Event Date"
+                            //placeholder="Event Date"
                         />
                         <AppFormBox
                             name="eventDescription"
