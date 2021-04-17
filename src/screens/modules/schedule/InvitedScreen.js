@@ -67,7 +67,10 @@ function InvitedScreen(props) {
                 <View>                   
                     <AppButton 
                         title="Attend" 
-                        onPress={() => onAttend()} 
+                        onPress={() => {
+                            onAttend();
+                            alert("Event added to calendar");
+                        }} 
                     />       
                 </View>
                 <View>      
