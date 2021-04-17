@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { Screen, AppButton } from '../../../components';
 import { getEventById } from '../../../utils/api_handler/events';
+import { createEventForCalendar } from '../../../utils/calendar';
 import colors from '../../../config/colors';
 
 function InvitedScreen(props) {
@@ -25,6 +26,15 @@ function InvitedScreen(props) {
         setDate(date);
         setLoading(false);
     };
+
+
+    const onAttend = async() => {
+        const title = event.data.eventTitle;
+        const event_date = event.data.eventDate;
+        const description = event.data.eventDescription;
+
+        await createEventForCalendar(title, event_date, description);
+    }
 
 
 
@@ -57,7 +67,7 @@ function InvitedScreen(props) {
                 <View>                   
                     <AppButton 
                         title="Attend" 
-                        onPress={() => console.log("attending event")} 
+                        onPress={() => onAttend()} 
                     />       
                 </View>
                 <View>      
