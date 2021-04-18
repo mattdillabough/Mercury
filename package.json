@@ -16,8 +16,10 @@
     "@react-navigation/stack": "^5.14.2",
     "axios": "^0.21.1",
     "expo": "~40.0.0",
+    "expo-calendar": "~8.6.0",
     "expo-constants": "~9.3.3",
     "expo-image-picker": "~9.2.0",
+    "expo-linking": "~2.0.1",
     "expo-local-authentication": "~9.5.0",
     "expo-secure-store": "~9.3.0",
     "expo-splash-screen": "~0.8.0",
@@ -25,6 +27,7 @@
     "expo-updates": "~0.4.0",
     "firebase": "^8.2.9",
     "formik": "^2.2.6",
+    "radio-buttons-react-native-expo": "^1.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
@@ -35,7 +38,8 @@
     "react-native-screens": "~2.15.2",
     "react-native-unimodules": "~0.12.0",
     "react-native-web": "~0.13.12",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "@react-native-community/datetimepicker": "3.0.4"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

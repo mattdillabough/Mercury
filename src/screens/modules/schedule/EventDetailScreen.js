@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { 
     Text, 
     StyleSheet, 
     View, 
-    Alert 
+    Alert, 
+    TouchableOpacity
 } from 'react-native';
 
 import { Screen, AppButton } from '../../../components';
 import { auth } from '../../../firebase/firebase';
 import { deleteEvent } from '../../../utils/api_handler/events';
+import { createEventForCalendar } from '../../../utils/calendar';
 import colors from '../../../config/colors';
 
 
@@ -16,10 +18,23 @@ function EventDetailScreen(props) {
 
     const [isAuthor, setIsAuthor] = useState(false);
     const event = props.route.params.article;
+    let date = new Date(event.data.eventDate).toLocaleDateString();
 
     useEffect(() => {
         checkForAuthor();
     }, [])
+
+    useLayoutEffect(() => {
+        props.navigation.setOptions({
+            headerRight: () => {
+                return(
+                    <TouchableOpacity style={{marginRight: 15}} onPress={() => props.navigation.navigate('Event Invite', {eventId: event.id})}>
+                        <Text style={{fontSize: 18, color: colors.blue}}>Invite</Text>
+                    </TouchableOpacity>
+                )
+            }
+        })
+    })
 
     // If current event document author is the signed in user, edit & delete buttons are shown
     const checkForAuthor = () => {
@@ -50,6 +65,14 @@ function EventDetailScreen(props) {
         props.navigation.navigate("Schedule");
     }
 
+    const onAttend = async() => {
+        const title = event.data.eventTitle;
+        const event_date = event.data.eventDate;
+        const description = event.data.eventDescription;
+
+        await createEventForCalendar(title, event_date, description);
+    }
+
     return (
         <Screen style={styles.container}>
 
@@ -63,7 +86,7 @@ function EventDetailScreen(props) {
                 </Text>
 
                 <Text style={styles.date}>
-                    {event.data.eventDate}
+                    {date}
                 </Text>
 
                 <Text style={styles.description}>
@@ -86,7 +109,10 @@ function EventDetailScreen(props) {
                         : 
                         <AppButton 
                             title="Attend" 
-                            onPress={() => console.log("attending event")} 
+                            onPress={() => {
+                                onAttend();
+                                alert("Event added to calendar")
+                            }} 
                         /> 
                     }
                 </View>

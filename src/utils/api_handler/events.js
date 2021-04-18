@@ -53,6 +53,24 @@ export const editEvent = async(data) => {
 }
 
 
+export const getEventById = async(data) => {
+    const token = await getToken();
+    const url_endpoint = url + "/getEvent?event=" + data;
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+
+    let event = await axios
+        .get(url_endpoint, {headers: headers})
+        .then(response => response.data)
+        .catch(error => console.error(error.message));
+        
+    return event;
+}
+
+
 export const getRecentEvents = async() => {
     const token = await getToken();
     const url_endpoint = url + "/getRecentEvents";
@@ -62,7 +80,10 @@ export const getRecentEvents = async() => {
         'Authorization': token
     }
 
-    let data = await axios.get(url_endpoint, {headers: headers}).then(response => response.data);
+    let data = await axios
+        .get(url_endpoint, {headers: headers})
+        .then(response => response.data)
+        .catch(error => console.error(error.message));
     return data;
 }
 

@@ -6,11 +6,14 @@ import {
 } from 'react-native';
 
 function EventCard({ event }) {
+
+    const date = new Date(event.eventDate).toLocaleDateString();
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}> {event.eventTitle} </Text>
             <Text style={styles.organizer}> {event.eventOrganizer} </Text>
-            <Text style={styles.date}> {event.eventDate} </Text>
+            <Text style={styles.date}> {date} </Text>
         </View>
     );
 }

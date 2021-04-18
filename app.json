@@ -2,6 +2,7 @@
   "name": "electric-eagles",
   "displayName": "electric-eagles",
   "expo": {
+    "scheme": "myapp",
     "name": "electric-eagles",
     "slug": "electric-eagles",
     "version": "1.0.0",
