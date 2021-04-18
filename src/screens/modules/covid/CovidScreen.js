@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
 
-import { Screen, AppFormChoice } from '../../../components';
+import { Screen, AppFormChoice, AppButton } from '../../../components';
 
 const data = [
     {
@@ -19,6 +19,16 @@ function CovidScreen(props) {
     const [question3, setQuestion3] = useState("");
     const [question4, setQuestion4] = useState("");
     const [question5, setQuestion5] = useState("");
+
+    const onSubmit = () => {
+
+        if((question1.label === question2.label) === (question3.label === question4.label) === (question5.label === "No")){
+            alert("Access to CDC facilities APPROVED. Please show this to security at the facility entrance. Thank you for helping us protect you and others during this time.")
+        }
+        else{
+            alert("Access to CDC facilities NOT APPROVED. Please see next page for further instructions. Thank you for helping us protect you and others during this time.")
+        }
+    }
 
     return (
         <Screen>
@@ -75,6 +85,8 @@ function CovidScreen(props) {
                     data={data}
                     selectedBtn={(choice) => setQuestion5(choice)}
                 />
+
+                <AppButton title="submit" onPress={onSubmit} />
             </ScrollView>
         </Screen>
     );
