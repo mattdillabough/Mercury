@@ -19,6 +19,10 @@ The project uses React Native which is helpful in developing a single applicatio
 - [x] Users can direct message (1-on-1 chat)
 - [x] Users can message a group (group chat)
 
+## Wiki Documentation
+
+The project Wiki Documentation can be found [here](https://github.com/junqili259/Mercury/wiki).
+
 
 ## Tools we used
 
@@ -53,3 +57,8 @@ We learned quite a bit of git workflow with several branches, PRs and merges. We
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+
+## Authors
+
+Jun Qi Li, Eric Widiaia
