@@ -40,7 +40,7 @@ We learned quite a bit of git workflow with several branches, PRs and merges. We
 
 ## License 
 
-    Copyright 2021 Eletric Eagles, Pod 2-2-1, MLH Fellowship
+    Copyright 2021 Eletric Eagles, Pod 2-2-1, MLH Externship Fellowship
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
