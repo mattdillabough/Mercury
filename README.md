@@ -35,7 +35,7 @@ The project Wiki Documentation can be found [here](https://github.com/junqili259
 + Yup
 + Additional libraries used are listed in our [package.json](https://github.com/junqili259/Mercury/blob/master/package.json)
 
-## Setup
+## Setup + API
 
 ### Step 1
 Clone this repository
