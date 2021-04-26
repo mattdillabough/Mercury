@@ -35,18 +35,25 @@ The project Wiki Documentation can be found [here](https://github.com/junqili259
 + Yup
 + Additional libraries used are listed in our [package.json](https://github.com/junqili259/Mercury/blob/master/package.json)
 
+## Setup
 
-## Challenges we ran into
- <ul>
- <li>Setting up our development environments</li>
- <li>Learning how components, state and props work in React Native</li>
- <li>Installing package managers and library imports</li>
- <li>Integrating the modular parts we individually worked on</li>
- </ul>
- 
-## What we learned
+### Step 1
+Clone this repository
 
-We learned quite a bit of git workflow with several branches, PRs and merges. We also learned that React Native has a lot of support libraries. It was also cool to find out how React Native maps it's UI objects to the native elements. Lastly, we learned the basics of JavaScript & React Native.
+### Step 2
+Install the packages for this application
+```
+npm install
+```
+
+### Step 3
+Running the application
+```
+npm start
+```
+
+### Step 4
+For API usage, click [here](https://github.com/junqili259/Mercury-backend)
 
 
 ## License 
