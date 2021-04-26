@@ -26,7 +26,14 @@ The project Wiki Documentation can be found [here](https://github.com/junqili259
 
 ## Tools we used
 
-We built it using VS Code. We also used the Expo platform to run the app, on simulator and physical devices. We also used Canva/Figma. Git was our version control system and GitHub was our team collaboration tool.
++ React Native
++ Firebase
++ React Navigation
++ Expo
++ Axios
++ Forimk
++ Yup
++ Additional libraries used are listed in our [package.json](https://github.com/junqili259/Mercury/blob/master/package.json)
 
 
 ## Challenges we ran into
@@ -61,4 +68,5 @@ We learned quite a bit of git workflow with several branches, PRs and merges. We
 
 ## Authors
 
-Jun Qi Li, Eric Widiaia
+Jun Qi Li
+Eric Widjaja
