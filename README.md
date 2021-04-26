@@ -69,4 +69,5 @@ We learned quite a bit of git workflow with several branches, PRs and merges. We
 ## Authors
 
 Jun Qi Li
+
 Eric Widjaja
