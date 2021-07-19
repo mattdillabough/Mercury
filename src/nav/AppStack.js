@@ -1,35 +1,46 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo } from '@expo/vector-icons';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Entypo, AntDesign } from "@expo/vector-icons";
 
-import ApplicationsTabScreen from '../screens/tabs/ApplicationsTabScreen';
-import ChatTabScreen from '../screens/tabs/ChatTabScreen';
-import ProfileTabScreen from '../screens/tabs/ProfileTabScreen';
+import ApplicationsTabScreen from "../screens/tabs/ApplicationsTabScreen";
+import ReviewItScreen from "../screens/tabs/ReviewItScreen";
+import ProfileTabScreen from "../screens/tabs/ProfileTabScreen";
+import ReportItScreen from "../screens/tabs/ReportItScreen";
+import RequestItScreen from "../screens/tabs/RequestItScreen";
 
 const Tab = createBottomTabNavigator();
 
 function AppStack(props) {
-    return (
-        <Tab.Navigator headerMode="none" screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
+  return (
+    <Tab.Navigator
+      headerMode="none"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          switch (route.name) {
+            case "Applications":
+              return <AntDesign name="home" size={size} color={color} />;
+            case "Review It":
+              return <AntDesign name="barschart" size={size} color={color} />;
+            case "Profile":
+              return <AntDesign name="setting" size={size} color={color} />;
+            case "Report It":
+              return <AntDesign name="cloudupload" size={size} color={color} />;
+            case "Request It":
+              return <AntDesign name="clouddownload" size={size} color={color} />;
 
-                if ( route.name === 'Applications' ) {
-                    return <Entypo name="home" size={size} color={color} />
-                } 
-                else if ( route.name === 'Chat') {
-                    return <Entypo name="chat" size={size} color={color} />
-                } 
-                else if ( route.name === 'Profile' ) {
-                    return <Entypo name="user" size={size} color={color} />
-                }
-            }
-        })} >
-            <Tab.Screen name="Applications" component={ApplicationsTabScreen} />
-            <Tab.Screen name="Chat"         component={ChatTabScreen} />
-            <Tab.Screen name="Profile"      component={ProfileTabScreen} />
-        </Tab.Navigator>
-    );
+            default:
+              break;
+          }
+        },
+      })}
+    >
+      <Tab.Screen name="Applications" component={ApplicationsTabScreen} />
+      <Tab.Screen name="Review It" component={ReviewItScreen} />
+      <Tab.Screen name="Report It" component={ReportItScreen} />
+      <Tab.Screen name="Request It" component={RequestItScreen} />
+      <Tab.Screen name="Profile" component={ProfileTabScreen} />
+    </Tab.Navigator>
+  );
 }
 
 export default AppStack;
