@@ -14,6 +14,11 @@ function AppStack(props) {
   return (
     <Tab.Navigator
       headerMode="none"
+      tabBarOptions={{
+        style: {
+          backgroundColor: "#FFC947",
+        },
+      }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
@@ -26,7 +31,9 @@ function AppStack(props) {
             case "Report It":
               return <AntDesign name="cloudupload" size={size} color={color} />;
             case "Request It":
-              return <AntDesign name="clouddownload" size={size} color={color} />;
+              return (
+                <AntDesign name="clouddownload" size={size} color={color} />
+              );
 
             default:
               break;
