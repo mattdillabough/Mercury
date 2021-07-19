@@ -15,6 +15,7 @@ function AppStack(props) {
     <Tab.Navigator
       headerMode="none"
       tabBarOptions={{
+        activeTintColor: "black",
         style: {
           backgroundColor: "#FFC947",
         },
