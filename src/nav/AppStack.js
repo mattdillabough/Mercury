@@ -19,6 +19,7 @@ function AppStack(props) {
         style: {
           backgroundColor: "#FFC947",
         },
+        showLabel: false
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
