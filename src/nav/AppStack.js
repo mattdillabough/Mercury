@@ -4,7 +4,7 @@ import { Entypo, AntDesign } from "@expo/vector-icons";
 
 import ApplicationsTabScreen from "../screens/tabs/ApplicationsTabScreen";
 import ReviewItScreen from "../screens/tabs/ReviewItScreen";
-import ProfileTabScreen from "../screens/tabs/ProfileTabScreen";
+import SettingsTabScreen from "../screens/tabs/SettingsTabScreen";
 import ReportItScreen from "../screens/tabs/ReportItScreen";
 import RequestItScreen from "../screens/tabs/RequestItScreen";
 
@@ -19,7 +19,7 @@ function AppStack(props) {
         style: {
           backgroundColor: "#FFC947",
         },
-        showLabel: false
+        showLabel: false,
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -47,7 +47,7 @@ function AppStack(props) {
       <Tab.Screen name="Review It" component={ReviewItScreen} />
       <Tab.Screen name="Report It" component={ReportItScreen} />
       <Tab.Screen name="Request It" component={RequestItScreen} />
-      <Tab.Screen name="Profile" component={ProfileTabScreen} />
+      <Tab.Screen name="Profile" component={SettingsTabScreen} />
     </Tab.Navigator>
   );
 }

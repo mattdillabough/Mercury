@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Image, 
-  TouchableOpacity 
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
@@ -18,12 +12,10 @@ import {
   removeData,
   removeKey,
   storeData,
-  getSecureData
+  getSecureData,
 } from "../../utils/cache_handler";
 
-
-function ProfileTabScreen({ navigation }) {
-  
+function SettingsTabScreen({ navigation }) {
   const [image, setImage] = useState();
 
   useEffect(() => {
@@ -32,7 +24,6 @@ function ProfileTabScreen({ navigation }) {
 
   // Display Profile image if in cache
   const fetchImage = async () => {
-
     const email = await getSecureData("USER");
 
     if ((await getData(email.toString())) !== null) {
@@ -45,14 +36,15 @@ function ProfileTabScreen({ navigation }) {
   };
 
   let openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    let permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
       return;
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
 
-    if (pickerResult.cancelled !== true){
+    if (pickerResult.cancelled !== true) {
       setImage(pickerResult.uri);
 
       const email = await getSecureData("USER");
@@ -90,20 +82,21 @@ function ProfileTabScreen({ navigation }) {
           onPress={openImagePickerAsync}
         />
 
-
         <Text style={[styles.text]}>Electric Eagle</Text>
-        <Text style={{textAlign: 'center'}}>eEagle@nyc.rr.com</Text>
+        <Text style={{ textAlign: "center" }}>eEagle@nyc.rr.com</Text>
         <View style={styles.locationContainer}>
           <MaterialCommunityIcons
             name="map-marker-radius"
             color="black"
             size={22}
           />
-          <Text style={{textAlign: 'center', fontWeight: 'bold'}}>FT. Bennings, GA</Text>
+          <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+            FT. Bennings, GA
+          </Text>
         </View>
       </View>
 
-      <View style={{paddingBottom: 15}}>
+      <View style={{ paddingBottom: 15 }}>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("Setting")}
@@ -158,7 +151,7 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     flexDirection: "row",
-    marginTop: 5
+    marginTop: 5,
   },
 
   profileImage: {
@@ -174,8 +167,8 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: "400",
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: "center",
   },
 });
 
-export default ProfileTabScreen;
+export default SettingsTabScreen;
