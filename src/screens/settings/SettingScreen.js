@@ -4,10 +4,10 @@ import { Text, FlatList, StyleSheet } from "react-native";
 import { Screen, SettingCard } from "../../components";
 
 const data = [
-  {id: 1, value: "Permissions"},
-  {id: 2, value: "Change Password"},
-  {id: 3, value: "Change Location"}
-]
+  { id: 1, value: "Permissions" },
+  { id: 2, value: "Change Password" },
+  { id: 3, value: "Change Location" },
+];
 
 function SettingScreen({ navigation }) {
   return (
@@ -15,10 +15,13 @@ function SettingScreen({ navigation }) {
       <Text style={styles.title}>Settings</Text>
       <FlatList
         data={data}
-        renderItem={({ item }) => 
-          <SettingCard item={item} onPress={() => navigation.navigate(item.value)} />
-        }
-        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => (
+          <SettingCard
+            item={item}
+            onPress={() => navigation.navigate(item.value)}
+          />
+        )}
+        keyExtractor={(item) => item.id.toString()}
       />
     </Screen>
   );
@@ -26,13 +29,13 @@ function SettingScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 15
+    marginTop: 15,
   },
   title: {
-    fontSize: 28, 
-    marginLeft: 10, 
-    fontWeight: 'bold'
-  }
-})
+    fontSize: 28,
+    marginLeft: 10,
+    fontWeight: "bold",
+  },
+});
 
 export default SettingScreen;

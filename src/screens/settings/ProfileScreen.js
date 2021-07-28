@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Switch,
+} from "react-native";
 
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
@@ -97,6 +104,9 @@ function SettingsTabScreen({ navigation }) {
       </View>
 
       <View style={{ paddingBottom: 15 }}>
+        <Switch
+          ios_backgroundColor="#3e3e3e"
+        />
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("Setting")}
