@@ -3,7 +3,7 @@ import { registerRootComponent } from "expo";
 import configureStore from "./src/redux/store";
 import App from "./App";
 import React from "react";
-import { Provider } from "redux";
+import { Provider } from "react-redux";
 
 const store = configureStore();
 
