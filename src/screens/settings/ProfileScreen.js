@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Switch,
 } from "react-native";
-
+import { useSelector, useDispatch } from "react-redux";
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
 import { logout } from "../../firebase/firebase";
@@ -104,9 +104,7 @@ function SettingsTabScreen({ navigation }) {
       </View>
 
       <View style={{ paddingBottom: 15 }}>
-        <Switch
-          ios_backgroundColor="#3e3e3e"
-        />
+        <Switch ios_backgroundColor="#3e3e3e" />
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("Setting")}
