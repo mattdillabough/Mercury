@@ -17,7 +17,14 @@ function ApplicationsTabScreen(props) {
       <Stack.Screen
         name="Applications"
         component={ApplicationScreen}
-        options={{ headerTitle: "Home" }}
+        options={{ 
+          headerTitle: "Home",
+          headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          }
+         }}
       />
       <Stack.Screen name="Schedule" component={ScheduleStack} />
       <Stack.Screen name="Medical" component={MedicalScreen} />

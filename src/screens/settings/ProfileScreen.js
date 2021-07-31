@@ -9,11 +9,9 @@ import {
   TouchableOpacity,
   Switch,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
 import { logout } from "../../firebase/firebase";
-
 import {
   getData,
   removeData,
@@ -21,8 +19,14 @@ import {
   storeData,
   getSecureData,
 } from "../../utils/cache_handler";
+import { toggleMode } from "../../redux/actions";
+import { modeReducer } from "../../redux/reducers/modeReducer";
+import { useSelector, useDispatch } from "react-redux";
 
 function SettingsTabScreen({ navigation }) {
+  const mode = useSelector((state) => state.modeReducer);
+  const dispatch = useDispatch();
+
   const [image, setImage] = useState();
 
   useEffect(() => {
@@ -104,7 +108,7 @@ function SettingsTabScreen({ navigation }) {
       </View>
 
       <View style={{ paddingBottom: 15 }}>
-        <Switch ios_backgroundColor="#3e3e3e" />
+        <Switch ios_backgroundColor="#3e3e3e" value={true} onValueChange={{}} />
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("Setting")}

@@ -5,7 +5,6 @@ function PopularCardItem({itemName}) {
   return (
     <View style={styles.container}>
       <Text>{itemName}</Text>
-      <Text>{itemName}</Text>
     </View>
   );
 }
@@ -15,7 +14,13 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
     borderRadius: 10,
-    backgroundColor: "grey",
+    backgroundColor: "lightgrey",
+    height: 100,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    
   },
 });
 export default PopularCardItem;

@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 
 const store = configureStore();
 
-
 const ReduxProvider = () => (
   <Provider store={store}>
     <App />
