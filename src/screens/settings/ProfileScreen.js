@@ -20,12 +20,13 @@ import {
   getSecureData,
 } from "../../utils/cache_handler";
 import { toggleMode } from "../../redux/actions";
-import { modeReducer } from "../../redux/reducers/modeReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 function SettingsTabScreen({ navigation }) {
   const mode = useSelector((state) => state.modeReducer);
   const dispatch = useDispatch();
+
+  console.log(mode);
 
   const [image, setImage] = useState();
 
@@ -108,7 +109,11 @@ function SettingsTabScreen({ navigation }) {
       </View>
 
       <View style={{ paddingBottom: 15 }}>
-        <Switch ios_backgroundColor="#3e3e3e" value={true} onValueChange={{}} />
+        <Switch
+          ios_backgroundColor="#3e3e3e"
+          value={mode.isDarkMode}
+          onValueChange={() => dispatch(toggleMode())}
+        />
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.navigate("Setting")}
