@@ -12,12 +12,13 @@ const Tab = createBottomTabNavigator();
 
 function AppStack(props) {
   return (
+    
     <Tab.Navigator
       headerMode="none"
       tabBarOptions={{
         activeTintColor: "black",
         style: {
-          backgroundColor: "#FFC947",
+          backgroundColor: "#EFA900",
         },
         showLabel: false,
       }}

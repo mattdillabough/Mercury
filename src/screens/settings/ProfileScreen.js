@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Switch,
+  StatusBar,
 } from "react-native";
 import colors from "../../config/colors";
 import { Screen, IconButton } from "../../components";
@@ -23,10 +24,9 @@ import { toggleMode } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
 function SettingsTabScreen({ navigation }) {
-  const mode = useSelector((state) => state.modeReducer);
+  const state = useSelector((state) => state.modeReducer);
+  const theme = state.mode.theme;
   const dispatch = useDispatch();
-
-  console.log(mode);
 
   const [image, setImage] = useState();
 
@@ -79,6 +79,9 @@ function SettingsTabScreen({ navigation }) {
 
   return (
     <Screen style={styles.container}>
+      <StatusBar
+        barStyle={state.isDarkMode ? "light-content" : "dark-content"}
+      />
       <View>
         <View style={styles.profileImage}>
           <Image
@@ -111,7 +114,7 @@ function SettingsTabScreen({ navigation }) {
       <View style={{ paddingBottom: 15 }}>
         <Switch
           ios_backgroundColor="#3e3e3e"
-          value={mode.isDarkMode}
+          value={state.isDarkMode}
           onValueChange={() => dispatch(toggleMode())}
         />
         <TouchableOpacity
