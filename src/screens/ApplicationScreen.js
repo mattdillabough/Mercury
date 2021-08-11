@@ -32,7 +32,7 @@ function ApplicationScreen({ navigation }) {
 
   
   return (
-    <Screen>
+    <View style={styles.container}>
       <FlatList
         data={formatData(modules, numColumns)}
         renderItem={({item}) => {
@@ -48,12 +48,16 @@ function ApplicationScreen({ navigation }) {
         keyExtractor={item => item.id}
         numColumns={numColumns}
       />
-    </Screen>
+    </View>
   );
 }
 
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    flex: 1
+  },
   item: {
     alignItems: 'center',
     justifyContent: 'center',

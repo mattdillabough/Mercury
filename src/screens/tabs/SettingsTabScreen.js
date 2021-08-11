@@ -1,12 +1,15 @@
+/* eslint-disable react/display-name */
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
+import { Button, TouchableOpacity } from "react-native";
 import ProfileScreen from "../settings/ProfileScreen";
 import SettingScreen from "../settings/SettingScreen";
 import PermissionScreen from "../settings/PermissionScreen";
 import PasswordScreen from "../settings/PasswordScreen";
 import LocationScreen from "../settings/LocationScreen";
+import { Feather } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import { IconButton } from "../../components";
 
 const Stack = createStackNavigator();
 
@@ -18,19 +21,29 @@ function ApplicationsTabScreen(props) {
       <Stack.Screen
         name="Setting"
         component={SettingScreen}
-        options={{
+        options={({ navigation }) => ({
+          headerRight: () => (
+            <TouchableOpacity
+              style={{
+                marginRight: 20,
+              }}
+              onPress={() => navigation.navigate("Profile")}
+            >
+              <Feather name={"user"} color={"black"} size={30} />
+            </TouchableOpacity>
+          ),
           headerTitle: "Settings",
           headerTitleStyle: {
             fontSize: 24,
-            color: theme.textColor
+            color: theme.textColor,
           },
           headerStyle: {
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,
-            backgroundColor: theme.backgroundColor
+            backgroundColor: theme.backgroundColor,
           },
-        }}
+        })}
       />
       <Stack.Screen
         name="Profile"

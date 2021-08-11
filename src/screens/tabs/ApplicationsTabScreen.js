@@ -5,26 +5,33 @@ import ApplicationScreen from "../ApplicationScreen";
 import ScheduleStack from "../modules/schedule/ScheduleStack";
 import MedicalScreen from "../modules/medical/MedicalScreen";
 import CovidScreen from "../modules/covid/CovidScreen";
-
+import { useSelector } from "react-redux";
 import InvitedScreen from "../modules/schedule/InvitedScreen";
 
 const Stack = createStackNavigator();
 
 function ApplicationsTabScreen(props) {
-  // Add new module screens below
+
+  const state = useSelector((state) => state.modeReducer);
+  const theme = state.mode.theme;
   return (
     <Stack.Navigator initialRouteName="Applications">
       <Stack.Screen
         name="Applications"
         component={ApplicationScreen}
-        options={{ 
+        options={{
           headerTitle: "Home",
+          headerTitleStyle: {
+            fontSize: 24,
+            color: theme.textColor
+          },
           headerStyle: {
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,
-          }
-         }}
+            backgroundColor: theme.backgroundColor
+          },
+        }}
       />
       <Stack.Screen name="Schedule" component={ScheduleStack} />
       <Stack.Screen name="Medical" component={MedicalScreen} />

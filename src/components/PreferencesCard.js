@@ -10,7 +10,7 @@ function PreferencesCard({ navigation }) {
   const dispatch = useDispatch();
 
   const data = [
-    { id: 1, value: "Permissions", icon: "user" },
+    { id: 1, value: "Permissions", icon: "users" },
     { id: 2, value: "Change Password", icon: "lock" },
     { id: 3, value: "Change Location", icon: "map-pin" },
   ];
