@@ -1,38 +1,116 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, FlatList } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Screen } from "../../components";
+import { CardItem, PopularCardItem, SearchBox } from "../../components";
+import { useSelector } from "react-redux";
 
 const Stack = createStackNavigator();
 
+const DATA = [
+  {
+    id: "1",
+    title: "First Item",
+  },
+  {
+    id: "2",
+    title: "Second Item",
+  },
+  {
+    id: "3",
+    title: "Third Item",
+  },
+];
+
 let ReportIt = () => {
+  const state = useSelector((state) => state.modeReducer);
+  const theme = state.mode.theme;
+
+  const renderItem = ({ item }) => <CardItem itemName={item.title} />;
+  const renderPopItem = ({ item }) => <PopularCardItem itemName={item.title} />;
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.backgroundColor,
+    },
+    text: {
+      fontSize: 20,
+      marginLeft: 10,
+      color: theme.textColor
+    },
+    popularList: {
+      flex: 1,
+    },
+    list: {
+      flex: 2,
+    },
+    searchBox: {
+      flexDirection: "row",
+    },
+    searchBoxContainer: {
+      flex: 0.75,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  });
   return (
-    <Screen>
-      <View style={styles.container}>
-        <Text>Report It Screen</Text>
+    <View style={styles.container}>
+  
+      <View style={styles.searchBoxContainer}>
+        <SearchBox />
       </View>
-    </Screen>
+      <View style={styles.popularList}>
+        <Text style={styles.text}>Popular</Text>
+        <FlatList
+          horizontal={true}
+          data={DATA}
+          renderItem={renderPopItem}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        />
+      </View>
+      <View style={styles.list}>
+        <FlatList
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          style={styles.list}
+        />
+      </View>
+    </View>
+
   );
 };
 
 function ReportItScreen(props) {
+  const state = useSelector((state) => state.modeReducer);
+  const theme = state.mode.theme;
+
+
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Report It"
+        name="Request It"
         component={ReportIt}
-        options={{ headerTitle: "Report It" }}
+        options={{
+          headerTitle: "Request It",
+          headerTitleStyle: {
+            fontSize: 24,
+            color: theme.textColor
+          },
+          headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+            backgroundColor: theme.backgroundColor
+          },
+        }}
       ></Stack.Screen>
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-});
 
 export default ReportItScreen;

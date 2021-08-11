@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-import { Text, StyleSheet, View, FlatList, StatusBar } from "react-native";
+import { Text, StyleSheet, View, FlatList } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { CardItem, PopularCardItem, SearchBox } from "../../components";
 import { useSelector } from "react-redux";
