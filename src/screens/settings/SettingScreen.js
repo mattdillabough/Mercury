@@ -1,7 +1,9 @@
-import React from "react";
-import { Text, FlatList, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { ScrollView, StyleSheet } from "react-native";
+import { PreferencesCard, NotifcationsCard } from "../../components";
+import { useSelector, useDispatch } from "react-redux";
 
-import { Screen, SettingCard } from "../../components";
+import { LogBox } from "react-native";
 
 const data = [
   { id: 1, value: "Permissions" },
@@ -10,32 +12,26 @@ const data = [
 ];
 
 function SettingScreen({ navigation }) {
+  const state = useSelector((state) => state.modeReducer);
+  const theme = state.mode.theme;
+  const dispatch = useDispatch();
+
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: theme.backgroundColor,
+      flex: 1,
+    },
+  });
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
+
   return (
-    <Screen style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <SettingCard
-            item={item}
-            onPress={() => navigation.navigate(item.value)}
-          />
-        )}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </Screen>
+    <ScrollView style={styles.container}>
+      <PreferencesCard navigation={navigation} />
+      <NotifcationsCard />
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 15,
-  },
-  title: {
-    fontSize: 28,
-    marginLeft: 10,
-    fontWeight: "bold",
-  },
-});
 
 export default SettingScreen;

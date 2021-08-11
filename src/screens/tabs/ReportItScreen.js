@@ -93,10 +93,10 @@ function ReportItScreen(props) {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Request It"
+        name="Report It"
         component={ReportIt}
         options={{
-          headerTitle: "Request It",
+          headerTitle: "Report It",
           headerTitleStyle: {
             fontSize: 24,
             color: theme.textColor

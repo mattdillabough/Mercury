@@ -5,7 +5,13 @@ export { default as AppTextInput } from "./AppTextInput";
 export { default as KeyboardView } from "./KeyboardView";
 export { default as IconButton } from "./IconButton";
 export { default as EventCard } from "./EventCard";
+export { default as SettingsRow } from "./SettingsRow";
+export { default as NotifcationsCard } from "./NotificationsCard";
 export { default as SettingCard } from "./SettingCard";
+export { default as PopularCardItem } from "./PopularCardItem";
+export { default as CardItem } from "./CardItem";
+export { default as SearchBox } from "./SearchBox";
+export { default as PreferencesCard } from "./PreferencesCard";
 
 // Form components
 export { default as AppForm } from "./AppForm";
@@ -16,6 +22,3 @@ export { default as AppFormDatePicker } from "./AppFormDatePicker";
 export { default as ErrorMessage } from "./ErrorMessage";
 export { default as SubmitButton } from "./SubmitButton";
 export { default as EditFormField } from "./EditFormField";
-export { default as PopularCardItem } from "./PopularCardItem";
-export { default as CardItem } from "./CardItem";
-export { default as SearchBox } from "./SearchBox";
