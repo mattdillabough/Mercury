@@ -39,9 +39,9 @@ function NotifcationsCard({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Notfications</Text>
-      <SettingsRow item={"Push Notifications"} />
-      <SettingsRow item={"SMS Notifications"} />
-      <SettingsRow item={"Email Notifications"} />
+      <SettingsRow item={"Push Notifications"} icon={"message-circle"} />
+      <SettingsRow item={"SMS Notifications"} icon={"message-square"}/>
+      <SettingsRow item={"Email Notifications"} icon={"mail"} />
     </View>
   );
 }

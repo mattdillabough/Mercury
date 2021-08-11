@@ -53,7 +53,10 @@ function SettingsRow({
   ) : (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
+      <View style={styles.textContainer}>
+        <Feather size={27} name={icon} style={styles.icon} />
         <Text style={styles.text}>{item}</Text>
+      </View>
         <Ionicons
           name="chevron-forward"
           size={27}

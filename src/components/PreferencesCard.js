@@ -10,9 +10,9 @@ function PreferencesCard({ navigation }) {
   const dispatch = useDispatch();
 
   const data = [
-    { id: 1, value: "Permissions" },
-    { id: 2, value: "Change Password" },
-    { id: 3, value: "Change Location" },
+    { id: 1, value: "Permissions", icon: "user" },
+    { id: 2, value: "Change Password", icon: "lock" },
+    { id: 3, value: "Change Location", icon: "map-pin" },
   ];
 
   const styles = StyleSheet.create({
@@ -39,7 +39,10 @@ function PreferencesCard({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Preferences</Text>
-      <SettingsRow onPress={() => dispatch(toggleMode())} state={state.isDarkMode}/>
+      <SettingsRow
+        onPress={() => dispatch(toggleMode())}
+        state={state.isDarkMode}
+      />
       <FlatList
         scrollEnabled={false}
         data={data}
@@ -48,7 +51,7 @@ function PreferencesCard({ navigation }) {
             item={item.value}
             isSwitch={false}
             onPress={() => navigation.navigate(item.value)}
-            
+            icon={item.icon}
           />
         )}
         keyExtractor={(item) => item.id.toString()}
