@@ -1,19 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet, FlatList } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { Text, View, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 import { SettingsRow } from "../components";
-import { toggleMode } from "../redux/actions";
 
-function NotifcationsCard({ navigation }) {
+function NotifcationsCard() {
   const state = useSelector((state) => state.modeReducer);
   const theme = state.mode.theme;
-  const dispatch = useDispatch();
 
-  const data = [
-    { id: 1, value: "Permissions" },
-    { id: 2, value: "Change Password" },
-    { id: 3, value: "Change Location" },
-  ];
 
   const styles = StyleSheet.create({
     container: {
